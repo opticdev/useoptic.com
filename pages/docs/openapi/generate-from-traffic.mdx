@@ -1,0 +1,128 @@
+import Video from "../../../components/video";
+import {Callout} from "nextra-theme-docs";
+
+# Generate an accurate OpenAPI using Traffic
+
+Writing an OpenAPI specification from scratch is a near-impossible task. With Optic you can quickly bootstrap an accurate specification by collecting real API traffic and generating documentation from it.
+
+**First capture traffic**
+
+```
+optic oas capture openapi.yml https://api.yoursite.com
+```
+
+**Then have Optic add all of the observed API Operations to the spec**
+
+```
+optic oas verify openapi.yml --document all
+```
+
+<Video
+    src="/video/document-for-web.mp4"
+    poster="/video/document.png"
+    caption="Documenting an API from traffic"
+/>
+
+### Document your API in 10 minutes (Step-by-step guide)
+
+#### 1. Create an empty OpenAPI file.
+Optic [does not generate OpenAPI, it patches existing specifications](/docs/core-concepts#openapi-patching-not-generating). This allows to use Optic again whenever you add new functionality to your API or change existing endpoints. The `oas new` command will write an empty OpenAPI spec to disk.
+
+```
+optic oas new > openapi.yaml
+```
+
+#### 2. Capture traffic from your API
+
+Optic can capture traffic from a service you are running locally, or from staging/production. Point Optic at the hostname you want to capture traffic from:
+
+```
+optic oas capture openapi.yaml https://api.your-service.com
+```
+
+<Callout type="warning" emoji="⚠️">
+    `https://` traffic will not be captured unless you first run `optic setup-tls` and trust Optic's certificate.
+</Callout>
+
+<Callout type="warning" emoji="⚠️">
+    If you don't see any traffic being captured, [check our client guide for troubleshooting instructions](/docs/oas-reference/client-guides). You may need to change a setting so Optic's system proxy is used.
+</Callout>
+
+#### 3. Review observed API operations
+
+Now that we have captured some traffic, it is time to document our API's operations. Run the `verify` command:
+
+```
+optic oas verify openapi.yaml
+```
+
+**Optic detects undocumented operations:**
+
+You can see Optic tried to infer which parts of each path were variables. If it got anything wrong you should manually tell Optic to document those operations. The more operations you document, the more accurate Optic gets at inferring the paths.
+
+```
+ » Verifying API Behavior...
+
+ [ Undocumented ]    get  /todos/{todoId}/status
+ [ Undocumented ]  patch  /todos/{todoId}/status
+ [ Undocumented ]   post  /todos/{todoId}
+ [ Undocumented ]  patch  /user/profile/settings
+
+   (use "--document all" to to document these paths)
+   (use "--document "[method path], ..."" to to document one or more paths)
+
+```
+
+<Callout type="warning" emoji="⚠️">
+    Are some of the paths Optic observed not part of your API? Ie. Images, html, etc? Just add an extension to your OpenAPI file to tell Optic to ignore these paths going forward:
+    ```yaml {2-4}
+    openapi: 3.1.0
+    x-optic-path-ignore:
+    - "**/*.+(ico|png|jpeg|jpg|gif)"
+    - "/health-check"
+    info:
+    title: Our Service
+    version: 1.0.0
+    ```
+</Callout>
+
+#### 4. Start documenting operations
+
+Just like you run `git add` to track a new file in your codebase, you can start tracking API operations by having Optic add them to your OpenAPI spec.
+
+To document a single operation run:
+
+```
+optic oas verify openapi.yaml --document "get /todos/{todoId}"
+```
+
+To document all the operations Optic observed run:
+
+```
+optic oas verify openapi.yaml --document all
+```
+
+---
+
+That's it! You can manually go into your OpenAPI file and make changes. Optic will never overwrite them, even if you come back and document more endpoints later.
+
+
+#### 5. Share with your team
+
+You can use Optic Cloud to host internal API docs and share them with your team. As your API changes Optic will show developers API changelogs and even notify consumers of changes that affect them.
+
+
+**1. First login**
+```
+optic login
+```
+
+**2. Start tracking this API spec in Optic Cloud**
+
+Optic will upload your specification and track every version to each operation (like GitHub shows you file history). You can share the link to the documentation with your team 🚀 and they can even subscribe to changes:
+
+```
+optic api add openapi.yaml
+```
+
+![alt](/assets/api-docs.jpg)

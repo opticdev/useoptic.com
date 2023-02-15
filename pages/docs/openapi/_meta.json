@@ -1,0 +1,11 @@
+{
+  "generate-from-traffic": {
+    "title": "Generate OpenAPI from Traffic"
+  },
+  "update-from-traffic": {
+    "title": "Update OpenAPI with Traffic"
+  },
+  "verify-openapi": {
+    "title": "Verify OpenAPI is Accurate"
+  }
+}

@@ -1,0 +1,26 @@
+#### Client Compatibility
+
+Most clients work out of the box (✅) or after minor tweaks to their settings (🟡)
+
+| HTTP/s Client | Compatibility | Steps to capture traffic                                                                                                                                                                                                                                  |
+| ------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Chrome        | ✅            |                                                                                                                                                                                                                                                           |
+| Safari        | ✅            |                                                                                                                                                                                                                                                           |
+| Postman       | ✅ (defaults) | [Tell Postman to use System proxy](https://learning.postman.com/docs/getting-started/proxy/)                                                                                                                                                              |
+| Insomnia      | ✅ (defaults) | [Tell Insomnia to use System proxy](https://docs.insomnia.rest/insomnia/http-proxy)                                                                                                                                                                       |
+| Paw           | ✅ (defaults) | [Tell Paw to use System proxy](https://paw.cloud/docs/preferences/proxy)                                                                                                                                                                                  |
+| Httppie       | 🟡            | [Tell httppie to use the Optic Proxy](https://httpie.io/docs/cli/proxies)                                                                                                                                                                                 |
+| curl          | 🟡            | set `HTTP_PROXY` and `HTTPS_PROXY` in the environment before running curl commands                                                                                                                                                                        |
+| newman        | 🟡            | set `HTTP_PROXY` and `HTTPS_PROXY` in the environment before running curl commands                                                                                                                                                                        |
+| Firefox       | 🟡            | Firefox detects the MITM proxy and blocks it by default. 1) Navigate Firefox to the API host you want to capture from and "Accept" the Security Risk. For `localhost` captures set the netowrk option `network.proxy.allow_hijacking_localhost` to `true` |
+
+
+#### Capturing test traffic
+
+Optic can intercept traffic from your tests, provided they are sent over the network. When you run `capture` with `--command` flag the proxy will start and then run the command provided with `HTTP_PROXY` and `HTTPS_PROXY` injected into the environment:
+
+```bash
+optic oas capture openapi.yaml <target-url> --command <your-test-command>
+```
+
+If your tests do not run over the network, many frameworks have HAR logging libraries you can use to capture a HAR and pass it into Optic directly `verify --har logs.har`.

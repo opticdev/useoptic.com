@@ -1,0 +1,65 @@
+
+# Core Concepts
+
+Under the hood Optic is a version control tool (think git) for OpenAPI. In Optic there are two kinds of diffs: traffic to spec, and spec to spec. Optic's core use cases are just built on top of these diffs. Preventing breaking changes is just subscribing to spec Δ spec diff results for events like `property.removed`. Documenting your API from traffic is just transforming traffic Δ spec diffs into patches to your OpenAPI.
+
+## Diff functions
+
+### Traffic to spec
+
+Optic can diff HTTP logs (in the HAR format) against the behavior of the API in the specification. Undocumented paths/methods will show up as "undocumented operations" that you can add to the specification, and changes to an existing response/request/parameter will show up as "diffs".
+
+The `optic oas` commands are all built on traffic Δ spec diffs.
+
+### Spec to spec
+
+Optic can diff any two versions of an OpenAPI specification. The result of a spec Δ spec diff is an API changelog. Unlike a simple json diff, Optic's semantic changelog understands the OpenAPI domain and will only show you actual changes in the API. You could add $refs, refactors your schemas, etc and if the behavior is the same Optic won't show a diff.
+
+You can render these changelogs in CI to help everyone on the team do effective API Change Reviews, and you can use these changelogs to test for breaking changes and enforce your API style guide. Think of this as testing the API changes -- that's essentially how it works. Optic lets you listen for certain kinds of changes between versions ie `parameter.added` and write assertions.
+
+## OpenAPI patching (not generating)
+
+Many tools will generate an OpenAPI specification from traffic, but you are not able to run those generators over and over again. If you do, they will delete your manual contributions like descriptions or more specific schemas. What makes Optic unique is that it never "generates" a specification, it patches the existing one you give it. That is why you have to pass Optic an OpenAPI in every `optic oas ...` command.
+
+Optic will transform the traffic Δ spec diffs it detects into small json patches to your OpenAPI specification, which it will then apply. It makes surgical patches to your spec, just like a developer would -- they don't rewrite the whole spec when one type changes. Because Optic works this way, you could continue using it to document and update your spec for years instead of just once.
+
+The `optic diff` command is built on spec Δ spec diffs.
+
+
+## API Coverage and OpenAPI Accuracy
+
+Whether you work design-first or code-fist, it's hard to know whether your OpenAPI spec accurately describes your real API. `optic oas verify ...` solves this problem. All this command does is take traffic from your tests, manual QA, or from a real environment exits `1` when any traffic Δ diffs are detected. That's not very useful unless you know how much of your API is being tested. This is where coverage comes in. Optic will compute the % of your OpenAPI specification that has been verified. No diffs and high coverage is a strong signal that your API works as-designed:
+
+```
+ » Verifying API behavior...
+
+ API Behavior Report
+
+ Total Requests          : 128
+ Diffs                   : 0
+ Undocumented operations : 0
+ Undocumented bodies     : 0
+
+ Coverage Report 75.0%
+ ●●●●   get /users/{user}/followers
+   60   200
+ ●●◌◌   get /users/{user}/starred
+   25   200
+ ●●◌◌   get /gists/{gistId}
+   17   200
+ ●●◌◌   get /users/{user}/gists
+   16   200
+ ●◌◌◌   get /users
+   10   200
+ ◌◌◌◌   get /users/{user}/subscriptions
+    0   200
+
+No diffs detected. OpenAPI and implementation appear to be in sync.
+```
+
+## Forwards-only governance
+
+Many teams who use API-specific linters like Spectral have found that static linting does not work well for API specifications. If you write a lot of API standards for an existing API, you create a Catch-22 -- the only way to get the lint rules to pass is to make breaking changes, which everyone is trying to avoid. Developers turn off the rules OR stop paying attention.
+
+When Optic runs your Spectral, ReDoc or Optic rules, it can apply different rules to your `additions` than your existing operations. This is really valuable because it lets teams enforce their latest standards for new APIs, while also allows existing APIs to continue working as they were initially designed to. The signal noise ratio is really strong and developers always know what is important to fix, and what is not. Teams like Snyk who value API consistency across their entire company have migrated their [API governance tooling](https://github.com/snyk/sweater-comb) from Spectral to Optic because it is their developers actionable feedback on all the API changes they make.
+

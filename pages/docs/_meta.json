@@ -1,0 +1,21 @@
+{
+  "why-optic": "Why Optic",
+  "index": "Get Started",
+  "core-concepts": "Core Concepts",
+  "-- Workflows": {
+    "type": "separator",
+    "title": "Workflows"
+  },
+  "openapi": {
+    "title": "Documenting APIs"
+  },
+  "-- Share Documentation with team ": {
+    "type": "separator",
+    "title": "Sharing Documentation"
+  },
+  "-- Reference": {
+    "type": "separator",
+    "title": "Reference"
+  },
+  "oas-reference": "Capturing Traffic"
+}

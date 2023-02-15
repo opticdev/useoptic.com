@@ -1,0 +1,102 @@
+import Video from "../../../components/video";
+import {Callout} from "nextra-theme-docs";
+
+# Keep your OpenAPI spec and API in sync
+
+
+Optic makes it easy to document API changes as you work. All you have to do is collect traffic to the API operations that you have been working on, and Optic will figure out which lines of OpenAPI needs to be updated.
+
+**First capture traffic** from `localhost` or a development environment
+
+```
+optic oas capture openapi.yml http://localhost:5001
+```
+
+**Then ask Optic to compute the diff and patch any changed operations**
+
+```
+optic oas verify openapi.yml --patch
+```
+
+<Video
+    src="/video/api-verify.mp4"
+    poster="/video/verify.png"
+    caption="Update your OpenAPI spec using Optic"
+/>
+
+### Update your OpenAPI using traffic (Step-by-step guide):
+
+#### 1. Capture traffic from your API
+
+Optic can capture traffic from a service you are running locally, or from staging/production. Point Optic at the hostname you want to capture traffic from:
+
+```
+optic oas capture openapi.yaml https://api.your-service.com
+```
+
+<Callout type="warning" emoji="⚠️">
+    `https://` traffic will not be captured unless you first run `optic setup-tls` and trust Optic's certificate.
+</Callout>
+
+<Callout type="warning" emoji="⚠️">
+    If you don't see any traffic being captured, [check our client guide for troubleshooting instructions](/docs/oas-reference/client-guides). You may need to change a setting so Optic's system proxy is used.
+</Callout>
+
+#### 3. Review API diffs
+
+Now that we have captured some traffic, it is time to check for any API diffs. Run the `verify` command:
+
+```
+optic oas verify openapi.yaml
+```
+
+```
+ » Verifying API Behavior...
+
+
+[ Diff ] 'forks_url' is not documented
+operation: get /gists/{gistId}
+18 | application/json; charset=utf-8:
+19 |   schema:
+20 |     type: object
+21 |     properties:  Undocumented 'forks_url'
+22 |       url:
+23 |         type: string
+24 |       files:
+/Desktop/example/github.yml
+  (use "--patch" to update)
+
+
+API Behavior Report
+
+ Total Requests          : 6
+ Diffs                   : 1
+ Undocumented operations : 0
+ Undocumented bodies     : 0
+
+```
+
+You could manually update your OpenAPI specification and keep running `optic oas verify` until you have resolved all the diffs, OR you can ask Optic patch the spec for you.
+
+```
+optic oas verify openapi.yaml --patch
+```
+
+Optic will update your OpenAPI specification with a minimal set of patches.You can review (and even change) the patches Optic applied. The changes are easiest to view in your git client or using Optic's visual changelog:
+
+```
+optic diff openapi.yaml --base main --web
+```
+
+
+<Video
+    src="/video/new-changelog.mp4"
+    poster="/video/new-changelog.jpg"
+    caption="Review API Changes with Optic"
+/>
+
+
+
+---
+
+That's it 🚀 Now that your team has an easy way of updating the OpenAPI specification, it's time to set up Optic CI checks to prevent breaking changes and notify consumers about changes.
