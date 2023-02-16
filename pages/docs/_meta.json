@@ -2,16 +2,18 @@
   "why-optic": "Why Optic",
   "index": "Get Started",
   "core-concepts": "Core Concepts",
-  "-- Workflows": {
+  "-- Guides": {
     "type": "separator",
-    "title": "Workflows"
+    "title": "Guides"
   },
   "openapi": {
-    "title": "Documenting APIs"
+    "title": "Accurate OpenAPI"
   },
-  "-- Share Documentation with team ": {
-    "type": "separator",
-    "title": "Sharing Documentation"
+  "documentation": {
+    "title": "Share with your team"
+  },
+  "standards": {
+    "title": "Improve your APIs"
   },
   "-- Reference": {
     "type": "separator",
