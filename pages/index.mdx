@@ -6,11 +6,13 @@ import Link from 'next/link'
 import cn from 'clsx'
 import { useState } from 'react'
 import {VideoSlim} from "../components/video";
+import MiniCode from "../components/mini-code";
 
 
 import { Features, Feature } from '@components/features'
 
 import styles from './index.module.css'
+import Install from '../components/install.mdx'
 
 export function File({ name, className, ...props }) {
   return <span className={cn(styles.file, className)} {...props}>
@@ -47,19 +49,36 @@ export function I18n() {
   }/>
 }
 
-import docsCard from '../public/assets/card-1.png'
-import docsCardDark from '../public/assets/card-1.dark.png'
-
 <div className="home-content">
-  <div className="content-container">
-    <h1 className="headline">Ship amazing APIs</h1>
-    <p className="subtitle" style={{maxWidth: 800}}>
-        <b>The benefits of OpenAPI, without all the effort.</b> Optic helps you maintain accurate documentation, prevent breaking changes, improve the design of your API, and notify consumers about changes that affect them.
+  <div className="content-container grid sm:grid-cols-1 md:grid-cols-7 gap-10">
+  <div className="col-span-3">
+    <h1 className="headline">Version Control for your team’s APIs</h1>
+    <p className="subtitle" >
+        <b>Optic is an Open Source CLI that helps developers get the benefits of using OpenAPI, without all the effort.</b>
+        <div style={{fontSize: 18, marginTop: -40}}>
+            <br/><span className="text-green-700">✓</span>️ Keep your team's documentation up-to-date
+        <br/><span className="text-green-700">✓</span>️ Prevent breaking changes
+        <br/><span className="text-green-700">✓</span>️ Improve the design of your APIs
+        <br/><span className="text-green-700">✓</span>️ Notify consumers about changes that affect them.
+            </div>
     </p>
     <p className="subtitle">
       <Link className={styles.cta} href="/docs">Get started <span>→</span></Link>
         <span className="font-bold ml-2 text-sm">Have questions? <a href="https://calendly.com/opticlabs/optic-cloud-demo-chat" target="_blank">Book a demo</a></span>
     </p>
+  </div>
+  <div className="col-span-4 pt-10">
+          <Feature index={0} large centered id="docs-card" href="/docs/docs-theme/start">
+              <div>
+                  <VideoSlim
+                      src="/video/document-for-web.mp4"
+                      poster="/video/document.png"
+                  />
+              </div>
+          </Feature>
+
+      <div className="italic text-center font-bold mt-2 text-gray-600">Generate accurate OpenAPI documentation using traffic</div>
+  </div>
   </div>
 
     <div className="content-container grid sm:grid-cols-1 lg:grid-cols-3 gap-5 pt-10 " >
@@ -102,7 +121,7 @@ import docsCardDark from '../public/assets/card-1.dark.png'
       border-bottom: 1px solid #e5e7eb;
     }
     .features-container .content-container {
-      margin-top: -8rem;
+      //margin-top: -8rem;
     }
     :global(.dark) .features-container {
       background-color: #000;
@@ -272,66 +291,118 @@ import docsCardDark from '../public/assets/card-1.dark.png'
 
   <div className="features-container">
     <div className="content-container">
-      <Features>
-        <Feature index={0} large centered id="docs-card" href="/docs/docs-theme/start">
-            <h3 style={{position: 'absolute', top: 0, left: 0, width: "100%", paddingLeft: 4, paddingBottom: 12, paddingTop: 10, paddingRight: 9, backgroundColor: "white"}} className="font-bold text-black mb-3"> Optic keeps your OpenAPI documentation accurate </h3>
-            <div style={{marginTop: 30}}>
+
+        <h3 className="text-gray-400 ml-2 font-bold mb-7 text-xl tracking-wider">UNDERSTAND YOUR APIs</h3>
+
+
+        <Features>
+        <Feature index={0} large   href="/docs/docs-theme/start">
+
+            <h3>Accurate OpenAPI specs for each API</h3>
+            <p className='mb-4'>Optic makes it easy for developers to update the OpenAPI spec without having to write YAML. Capture API traffic using our CLI to bootstrap an accurate OpenAPI spec for your team, then keep it up-to-date with <MiniCode>optic oas verify</MiniCode> command.</p>
             <VideoSlim
                 src="/video/api-verify.mp4"
                 poster="/video/verify.png"
             />
-            </div>
         </Feature>
-        <Feature index={1} centered className="card-with-border" href="/docs/guide/image">
-          <div className="h-full flex flex-col justify-between">
-              <h3 style={{fontSize: 28}}>Prevent breaking changes</h3>
-            <div style={{flex: 1}}>
-                <p className='text-left mb-8'>
-                    Optic brings proper version control to your APIs. Because Optic understands API change over time it can test for breaking changes between major API versions and in your CI Pipelines:
-                </p>
-                <code className="nx-border-black nx-border-opacity-[0.04] nx-bg-opacity-[0.03] nx-bg-black nx-break-words nx-rounded-md nx-border nx-py-0.5 nx-px-[.25em] nx-text-[.9em] dark:nx-border-white/10 dark:nx-bg-white/10  " dir="ltr" data-language="bash" data-theme="default">optic diff openapi.yml --base main --check</code>
-                <img src="/assets/optic-ci-results.png" className="mt-8" />
-            </div>
-          </div>
-        </Feature>
-        <Feature index={2} href="/docs/guide/syntax-highlighting">
-          <h3>Document existing APIs<br className="show-on-mobile"/> in minutes.</h3>
-          <p>Just capture API traffic using our CLI and Optic will bootstrap an accurate OpenAPI spec for your team</p>
-            <img src="/assets/capture.png" className="mt-12" />
-        </Feature>
-        <Feature index={3} large href="/docs/guide/i18n">
-            <h3><span style={{fontWeight: 300}}>Documentation hub for</span> all your team's APIs</h3>
-          <p className='mb-4'>Optic Cloud is an API Catalogue that helps organizations with hundreds of API endpoints coordinate their efforts at scale. Developers get notifications when the APIs they use change, can see the full history of each service, and search the entire catalogue at once. Want to ship faster, with fewer bugs? <a href="https://calendly.com/opticlabs/optic-cloud-demo-chat" target="_blank">Book a demo</a> </p>
-            <img src="/assets/docs.png" className="mt-0" />
+          <Feature index={2} href="/docs/guide/syntax-highlighting">
+              <h3>Try Optic<br className="show-on-mobile"/></h3>
+              <Install />
+              <p>
+              <Link className="!no-underline font-bold" href="/docs/openapi/generate-from-traffic">Document your API using traffic →</Link>
+              </p>
+              <img src="/assets/capture.png" className="mt-1" />
+
+              <p><Link className="!no-underline font-bold" href="/docs/openapi/verify-openapi">Check the accuracy of your spec →</Link></p>
+
+
+              <img src="/assets/verify-accurate.png" className="mt-1" />
+
+
+          </Feature>
+      </Features>
+
+        <hr className="mt-20 mb-10"/>
+
+        <h3 className="text-gray-400 ml-2 font-bold mb-7 text-xl tracking-wider">BUILD TOGETHER</h3>
+
+        <Features>
+        <Feature index={0} large href="/docs/guide/i18n" style={{display: 'flex', flexDirection: 'column'}}>
+            <h3>Share documentation across your team</h3>
+          <p className='mb-4'>Optic's API Catalogue helps organizations with hundreds of API endpoints collaborate at scale. Developers get notifications when the APIs they use change, can find accurate documentation for each service, and search for APIs across the entire catalogue. <a href="https://calendly.com/opticlabs/optic-cloud-demo-chat" target="_blank">Book a demo</a> </p>
+            <div style={{flex: 1}}></div>
+            <img src="/assets/docs.png" className="mt-0" style={{marginBottom: -23}}  />
         </Feature>
 
+            <Feature index={1} >
+
+                <h3>Share API Docs<br className="show-on-mobile"/></h3>
+                <p>
+                    Optic Cloud makes a great internal docs hub for teams of any size. You can create a free account today and invite up to 20 developers: <br/> <br/>
+                    <MiniCode block>optic login</MiniCode>
+                    <br/>
+                    <MiniCode block>optic api add your-openapi.yml</MiniCode>
+                    <br/>
+                    <Link className="!no-underline font-bold" href="/docs/openapi/verify-openapi">Invite your team →</Link>
+                </p>
+            </Feature>
+        </Features>
+
+        <hr className="mt-20 mb-10"/>
+
+        <h3 className="text-gray-400 ml-2 font-bold mb-7 text-xl tracking-wider">SHIP HIGH QUALITY APIs</h3>
+
+        <Features>
+
+
         <Feature index={6} large id="search-card" href="/docs/docs-theme/theme-configuration#search">
-          <div style={{ zIndex: 2}}>
-            <h3>Review Every API Change<br/> during code review</h3>
-            <p>Reviewing OpenAPI diffs in GitHub/GitLab is really difficult. Optic adds semantic API changelogs to every Pull Request so your team can properly review and discuss every proposed API change.</p>
-          </div>
-          <div className="absolute w-full h-full inset-0 hidden sm:block bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]"/>
-          <video autoPlay="autoplay" loop muted playsInline className="block">
-            <source src="/video/changelog-small-just-for-home.mp4" type="video/mp4"/>
-          </video>
+            <div style={{ zIndex: 2}}>
+                <h3>Review Every API Change<br/> during code review</h3>
+                <p>Reviewing OpenAPI diffs in GitHub/GitLab is really difficult. Optic Cloud adds semantic API changelogs to every Pull Request so your team can properly review and discuss every proposed API change.</p>
+            </div>
+            <div className="absolute w-full h-full inset-0 hidden sm:block bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]"/>
+            <video autoPlay="autoplay" loop muted playsInline className="block">
+                <source src="/video/changelog-small-just-for-home.mp4" type="video/mp4"/>
+            </video>
         </Feature>
-          <Feature index={5} href="/docs/guide/syntax-highlighting">
-                <h3>Set API Standards <br className="show-on-mobile"/> developers can follow</h3>
+        <Feature index={7} className="card-with-border" >
+            <h3>Test your API Changes<br className="show-on-mobile"/></h3>
+            <p>
+                <b>Check for breaking changes:</b>
+                <MiniCode block>optic diff openapi.yml --base main --check</MiniCode>
+                <Link className="!no-underline font-bold mt-2 block" href="/docs/openapi/verify-openapi">Read diff docs →</Link>
+                <br/>
+
+                <b>View a changelog:</b>
+                <MiniCode block>optic diff openapi.yml --base main --web</MiniCode>
+                <Link className="!no-underline font-bold mt-2 block" href="/docs/openapi/verify-openapi">Add Changelogs to Pull Requests →</Link>
+                <br/>
+
+            </p>
+        </Feature>
+            <Feature index={8}  className="card-with-border" href="/docs/guide/image">
+                <div className="h-full flex flex-col justify-between">
+                    <h3 style={{fontSize: 28}}>Prevent breaking changes</h3>
+                    <div style={{flex: 1}}>
+                        <p className='text-left mb-8'>
+                             Because Optic understands API change over time it can test for breaking changes in your CI Pipelines.
+                        </p>
+                        <img src="/assets/optic-ci-results.png" className="mt-8" />
+                    </div>
+                </div>
+            </Feature>
+          <Feature index={9}  href="/docs/guide/syntax-highlighting">
+                <h3>Set API Standards</h3>
                 <p className='mb-4'>Optic is the smarter way to run your API Standards. It understands the history of your API and runs rules differently depending on the lifecycle of each endpoint. </p>
                 <img src="/assets/ci.png" style={{maxWidth: 300}} className="mt-0" />
           </Feature>
 
-          <Feature index={9} large>
-              <h3>Open Source and free to use</h3>
-              <p>Our CLI and core libraries are <a href="https://github.com/opticdev/optic">open sourced on GitHub</a> and MIT Licensed. You can use Optic to adopt OpenAPI, catch breaking changes, and verify your documentation's accuracy without paying a cent or making an account. We make money off Optic's Cloud -- our hosted documentation and change notification product. Optic would not be possible without awesome projects like <a href="https://github.com/ajv-validator/ajv">ajv</a>, <a href="https://github.com/nodeca/js-yaml">js-yaml</a>, and <a href="https://github.com/httptoolkit/mockttp">mockttp</a>. </p>
-              <p className="subtitle"><Link className="!no-underline" href="/docs">Start using Optic →</Link>
-                  <Link className="!no-underline ml-5" href="https://calendly.com/optic-onboarding/optic-office-hours">Meet the Maintainers</Link></p>
-          </Feature>
-        <Feature index={10} href="/docs/guide/ssg">
-          <h3>Cloud API Hub </h3>
-          <p className='mr-6'>Optic Cloud helps teams build amazing products on top of their APIs. You can use Optic Cloud free with a team of up to 20 users.<p> <Link className="!no-underline" href="https://app.useoptic.com">Sign up for Optic Cloud →</Link>
-              <Link className="!no-underline ml-5" href="/pricing">View Pricing</Link> </p></p>
-        </Feature>
+            <Feature index={9}  href="/docs/guide/syntax-highlighting">
+                <h3>Easy Setup</h3>
+                <p className='mb-4'>It only takes a few minutes to add Optic to GitHub and GitLab using our CI Recipes. Put the best API Review tools into your Pull/Merge Requests.</p>
+                <img src="/assets/githublab.png" style={{maxWidth: 300}} className="mt-0" />
+            </Feature>
+
 
       </Features>
     </div>
