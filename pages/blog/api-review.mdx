@@ -1,0 +1,50 @@
+
+
+import {Blog} from "../../components/blog";
+
+<Blog title={"How to do effective API Reviews with your team"} date={"2022-02-10"} author="aidan" image={"https://i.imgur.com/eeuPR2h.png"}  />
+
+We have all experienced the benefits of doing code reviews. They give everyone on the team an opportunity to give early feedback and share knowledge. This leads to better software, fewer bugs, and a stronger overall architecture for our applications. Because we all have different backgrounds and perspectives, code review works well when everyone on the team is included.
+
+Starting the practice of reviewing API changes has similar benefits on the quality, reliability and the developer experience of your API.
+
+
+
+### Track API changes contemporaneously
+
+Before you can benefit from API reviews, a team must first track API changes. This means adopting OpenAPI, and using tools and processes to make sure that changes to the API implementation are made in parallel with changes to OpenAPI specification. You can start with the OpenAPI (design-first) and mirror changes to the implementation, or go the other way (code-first).
+
+What matters is that each Pull Request that proposes changes to the API updates the OpenAPI description and the implementation in the same ways. This is important for two reasons:
+
+1. **Accurate:** For reviews to be effective, reviewers must have accurate knowledge about what changes are being made. They can not review what they can not see.
+2. **Actionable:** If API changes make it to production without going through an API Review, it is possible that some changes will break users or become something they start using. If the API change is out before it's been reviewed, the feedback from your team becomes harder to act upon. Sure — great idea for a better design, but if we switch it now, it would introduce breaking changes.
+
+For API review to be effective, they need to happen early and often.
+
+### Making the API changes obvious
+
+Who likes reading YAML diffs of 5k line files? Nobody. OpenAPI diffs are very hard to parse. You have to first understand OpenAPI, establish context about what part of the API is changing, and flatten a bunch of `$ref` in your head to understand the new behaviors being proposed.
+
+Even teams that effectively track their API changes report that they’ve had problematic changes get through their API review process. Some of the largest companies providing APIs like Stripe, Box and Microsoft realized OpenAPI diffs were unreadable and built in-house tools for visualizing API changes.
+
+Optic has its own tools for visualizing API changes that adds a semantic API changelog to every PR. Reviewers are busy, and they should not have to be OpenAPI experts to figure out what API changes are being proposed. Making API review easier and more inclusive leads to better designs and a more enjoyable API for your consumers.
+
+![alt](/img/changelog-basic.png)
+
+### Use Automation
+
+Running tests in CI gives us a lot of confidence that we did not break anything important. There are a lot of things that might look safe in code, but actually change the behavior of critical parts of our applications. Good tests empower teams to ship quickly, and let human reviewers focus on design, maintainability and sharing their knowledge.
+
+The same kind of automation helps with API Review. Nobody should be “looking for breaking changes”. The definition of a breaking change is well-defined, and tests should be able to catch these whenever our OpenAPI file changes.
+
+`optic-ci` goes [beyond API linting](https://www.useoptic.com/blog/beyond-api-linting). It compares the OpenAPI specification between the two branches in your PR and checks for problematic changes. Teams use `optic-ci` to prevent breaking changes and to help every developer learn and follow their API design standards.
+
+![alt](/img/check-for-breaking.png)
+
+## Bringing it all together
+
+Starting effective API Reviews is the first step to working API first. Optic did not invent any of these practices — most were born in large companies who had the resources to invest in their internal tooling. What we are trying to do is democratize them with our open source project and make it easy for every team to go API first.
+
+You can read about [Snyk’s API-first journey with Optic here](https://snyk.io/blog/snyk-api-development-shift-left/).
+
+If you’re interested in starting API reviews and helping us build a great open source project, please join our beta.

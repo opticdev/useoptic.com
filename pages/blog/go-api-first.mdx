@@ -1,0 +1,91 @@
+---
+date: 2022-8-03
+title: "Going API-first"
+author: Aidan Cunniffe
+description: "Deploying an API is like launching a satellite. Once it is in orbit, you can not really change it. If you are clever, you’ve added the ability to make orbital adjustments and small software upgrades (an evolvable API-design). But if you want to make fundamental changes, you have to launch another satellite and de-orbit the first."
+image: "https://i.imgur.com/AWFXM3O.png"
+author_url: "https://github.com/acunniffe"
+author_image_url: "/img/team/aidan.jpg"
+category: Community
+---
+
+
+import {Blog} from "../../components/blog";
+
+<Blog title={"Going API-first"} date={"2022-08-03"} author="aidan" image="https://i.imgur.com/AWFXM3O.png"/>
+
+
+
+APIs have become the most important dependency in our stack. They allow us to collaborate at scale, and build software that is greater than the sum of its parts.
+
+If you are on a team that produces an API, then you know that it comes with a lot of responsibility. Unlike code dependencies, when an API is changed, it affects all of its consumers immediately. This means your team has the power to break other team’s applications whenever you deploy changes (no pressure).
+
+That is what makes APIs so different than any other kinds of development. Deploying an API is like launching a satellite. Once it is in orbit, you can not really change it. If you are clever, you’ve added the ability to make orbital adjustments and small software upgrades (an evolvable API-design). But if you want to make fundamental changes, you have to launch another satellite and de-orbit the first.
+
+The constraints of API development are why many teams try to work **API-first.** They want to build the right API, the first-time (before it gets to orbit). They want everyone on the team to be thoughtful about introducing new capabilities and changing the API. Most importantly, they want to keep their promises to consumers.
+
+It sounds great, but it takes work. Optic makes it a lot easier for developers without changing much about their workflow. The journey looks something like this:
+
+![alt](/img/going-api-first-bare.png)
+
+
+
+
+## 0 → 1: Tracking changes with OpenAPI
+
+The first step to working API-first is knowing how your API works today, and making sure changes to the API are being tracked. It is important that we track these changes contemporaneously — if we update our code we should also update our specification. If we update our specification, we should also update our code to match before we merge. However your team works, it’s important that every time you merge code changes, you know how the API is changing.
+
+**Optic makes it easy to adopt OpenAPI and start tracking changes.**
+
+Imagine git, but for OpenAPI. Show Optic traffic as you develop, and it will help you `add` new operations and `update` your OpenAPI specification. Keeping your OpenAPI up-to-date should be as easy as checking in code. Optic is a collaborator. It does the hard parts so you can focus on what’s important.
+
+<iframe src="https://player.vimeo.com/video/736256873?h=f9ed750a73&title=0&byline=0&portrait=0" width="640" height="360" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+
+## 1 → 2: Reviewing API Changes
+
+We have all experienced the benefits of doing code reviews. They lead to better software, fewer bugs, and a stronger overall architecture for our applications. The same is true for API changes. The more thoughtful we are about the APIs we publish and the changes we introduce, the higher quality our APIs. The best results come from making this as inclusive as possible, and bringing people from across our team with backgrounds and perspectives, not just developers (tech writers, product, support all have important insights).
+
+The problem is that leaving a good API Review is hard today because [OpenAPI diffs are very difficult to review](https://www.useoptic.com/blog/diffs-api-changes). Even developers miss things because of how large and complex the specs are.
+
+**Optic makes it easy for everyone on your team to review the ACTUAL changes being proposed:**
+
+<iframe src="https://player.vimeo.com/video/671743693?h=f9ed750a73&title=0&byline=0&portrait=0" width="640" height="360" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+
+## 2 → 3: Testing for breaking changes
+
+Running tests in CI gives us a lot of confidence that we did not break anything important. There are a lot of things that might look fine in the code, but actually change the behavior of critical parts of our applications. Good tests empower teams to ship quickly, and let human reviewers focus on design, maintainability and sharing their knowledge about API design.
+
+The same kind of automation helps with API Review. Nobody should be “looking for breaking changes”. The definition of a breaking change is well-defined, and tests should be able to catch these whenever our OpenAPI file changes.
+
+**Optic makes it easy to catch breaking changes in CI, so you don’t break consumers:**
+<img src="/img/check-for-breaking.png" />
+
+## 3 → 4: Adopting and testing for API Standards
+
+The way we design our APIs can make it easy for us to change them later on, or harder. The way we design our APIs can make them easier for teams to adopt and depend upon, or harder. The value of having API Standards is that once our team (or other teams we respect) learn these lessons, we can make it easy for everyone on our team to follow them. Everyone on the team may not understand why every standard exists and that’s ok. If they make a mistake, a good tool catches them and teaches them why what they’re being asked to do is important.
+
+**Optic makes it easy to share this knowledge and enforce your API Standards with your team.** [It goes way beyond API linting](https://www.useoptic.com/blog/beyond-api-linting) which usually stops at requiring descriptions, naming convention or other metadata.
+
+<img src="/img/example-standard.png"/>
+
+You can read about how [Snyk replaced Spectral with Optic](about:blank), and check out their [public API standards here](https://github.com/snyk/sweater-comb).
+
+## 4 → 5: Gather Evidence your API is working as designed
+
+Once we’re working API-first, we have to make sure reality matches our specifications. We’ve designed a great API, but did we actually build it? There are a lot of approaches that work here depending on your team and API.
+
+- Generating code and types for your server from OpenAPI (make deviations compiler errors)
+- Contract Testing (simulate traffic across your API’s entire surface area and test the requests and responses)
+- Runtime OpenAPI validation in gateway (only valid requests/responses are allowed. count the errors in DataDog)
+- Live traffic sampling (sample and validate your API is working as described).
+
+Once you have a good process in place to keep your API and OpenAPI specification aligned, you can be confident that the fruits of your API design and review process make it to consumers and production.
+
+---
+
+## Starting the Journey
+
+That's a big list, but I hope seeing it step-by-step makes it feel more tangible and possible. There is a path from wherever you are today, to working more API-first -- it does not have to happen all at once or overnight.
+
+Optic’s open source tools are built to help!. **[Start using the Optic CLI](http://useoptic.com/)**. And if you’d like to talk to our team about your journey we’d love to share what we have learned and help you make a plan. **Set up [some time here to talk with our team.](https://www.useoptic.com/book-demo)**
+

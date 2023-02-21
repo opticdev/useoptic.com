@@ -1,0 +1,34 @@
+
+import Video from "../../components/video";
+import {Blog} from "../../components/blog";
+
+
+<Blog title={"OpenAPI Versioning just got easier"} date={"2023-02-10"} author="aidan" image={"https://i.imgur.com/e3KlBZx.png"}  />
+
+
+Many of the teams using Optic build internal APIs — they still want to prevent breaking changes, but occasionally they decide breaking the API contract is the best path forward. They send an Optic changelog to their consumers, coordinate the release, and (hopefully) it all goes well.
+
+
+Some users have been asking our suggested workflow for making breaking changes — should they ignore warnings from Optic? Merge past the CI failures? Turn off breaking change rules then turn them back on?
+
+On a call this week a developer suggested we use the semantic `version` in the OpenAPI file. If they made a major version bump, then breaking changes will be allowed. We immediately that might make a lot of sense, and threw up a quick PR.
+
+Let’s look at an example:
+- Optic catches the breaking change: `created_before` as a required query parameter
+- It fails its checks
+- When you bump the major version the change is still detected, but the checks pass
+
+<div className="tailwind">
+<Video caption="Major API version can have breaking changes" src="/video/breaking-changes.mp4" poster="/video/breaking-changes.png" />
+</div>
+
+
+<div style={{marginTop: 30}}>
+
+**That’s it! [You can start using the latest version of Optic by clicking here](/docs/openapi-diff)**
+
+</div>
+
+We are thinking about going further with this idea and publishing a new ruleset called `semantic-versioning` — it would make sure that `info.version` is changed to match the kinds of changes you have made (be them major, minor, or patch). We’re still trying to decide exactly what kinds of API changes are minor vs patch, if you want to weigh in join this discussion on GitHub.
+
+That’s all for now! Optic team :)

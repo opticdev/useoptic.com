@@ -1,0 +1,92 @@
+---
+date: 2022-01-25
+title: "An Intro to Authoring API Guidelines"
+author: Stephen Mizell
+author_url: "https://github.com/smizell"
+author_image_url: "/img/team/smizell.jpg"
+description: "Let's take a look at how you might start writing API guidelines using Optic's new optic-ci tool"
+# image: ""
+category: Community
+---
+
+
+import {Blog} from "../../components/blog";
+
+<Blog title={"An Intro to Authoring API Guidelines"} date={"2022-01-25"} author="aidan" image="https://i.imgur.com/AWFXM3O.png"/>
+
+
+
+Let's say someone on your team got in a hurry and introduced a breaking change for your API in their Pull Request (PR). Let's say they added a required query parameter. Luckily, someone on your team caught it during the code review and kept it from getting into production. That was close! How can your team make sure this doesn't happen in the future? Instead of relying on someone to manually check for these things, you can write an API guideline that does it automatically.
+
+We've recently released a new tool called `optic-ci` for writing these kinds of API guidelines. The features of `optic-ci` go [beyond linting](https://www.useoptic.com/blog/beyond-api-linting) OpenAPI documents and making sure they follow the standards. With `optic-ci`, you can write checks that make sure your team is avoiding certain kinds of API changes, which in this case is introducing breaking changes.
+
+Let's look at how you and your team might write a rule to avoid adding a required query parameter in the future.
+
+## Designing the API guideline
+
+The first step to writing your new API guideline is to describe what you want to check and provide both passing and failing examples. This a design-first approach to writing API guidelines.
+
+In this case, you describe the guideline, add a passing example where the `added` request parameter is optional, and add a failing example where the `added` request parameter is required.
+
+```typescript
+export default check('prevent adding required query parameter')
+  .passingExample(
+    scenario('adding optional').requestParameter.added({
+      in: 'query',
+      name: 'exampleParam',
+      required: false,
+    })
+  )
+  .failingExample(
+    scenario('adding required').requestParameter.added({
+      in: 'query',
+      name: 'exampleParam',
+      required: true,
+    })
+  );
+```
+
+This gives your team a chance to think through the change and discuss the specifics of how you want to guide people as they add query parameters. The code is straightforward and the examples are narrowly-focused—no need to write a full OpenAPI document to show the scenarios. And this code acts as a guide to the developer who implements the check later, making sure the design and implementation match.
+
+## Implementing the API guideline
+
+You're now ready to implement the guideline. The `optic-ci` tool will use the examples from above to guide you as you go.
+
+```typescript
+export default check('prevent adding required query parameter')
+  .implementation(({ request }) => {
+    request.queryParameter.added.must('not be allowed', (param) => {
+      if (param.required) {
+        expect.fail('expected query parameter to not be required');
+      }
+    });
+  })
+  .passingExample(/* ... */)
+  .failingExample(/* ... */);
+```
+
+This check does a few really nice things:
+
+* **Adds annotations where things fail**. When `optic-ci` finds a failing check in the future, it will annotate the diff for the OpenAPI document in the PR as if someone on your team found the issue and commented on it.
+* **Prevents breaking changes from making it through**. When this check fails, it will automatically prevent the change from making it to production. This allows you to rely on the tool rather than someone manually catching it.
+* **Cuts down on the noise**. This check only runs when someone adds a new query parameter, limiting the the feedback to only what's changed. This cuts down on the noise and makes the guidelines actionable.
+
+When everything looks good, you can add this code to your set of checks and start using it immediately in your code reviews.
+
+## There's more to share
+
+With `optic-ci`, we wanted to create a workflow that enables people to go from nothing to a designed, tested, and implemented API guideline in minutes.  We wanted the workflow to revolve around developers and their communication rather than being about exerting control over API designs. And we wanted a way to write guidelines that are implemented correctly based on the original design discussions, which is really important. We feel like we've hit our mark.
+
+The great part of this is the authoring process takes minutes to do and can have an immediate impact on your developer productivity and API quality.
+
+There's many more features to `optic-ci` and this workflow that we didn't share. We'll be going exploring those in the coming posts.
+
+### Get started
+
+Optic CI is still in beta, and we're working towards a public release in coming weeks. If you'd like to partner to make `optic-ci` great, **[please join our beta](/book-demo)**. This has been really exciting to build! Stay tuned for more open source rulesets, case studies, and tools for authoring your own checks!
+
+**Try it yourself!**
+
+- [Go turn on `optic-ci` in your CI pipeline today!](/blog/catch-breaking-changes-in-prs)
+- [Feedback welcome here](https://github.com/opticdev/optic/issues/new?assignees=&labels=optic-ci&template=OPTIC-CI.yml&title=%5BOptic-CI%5D%3A+)
+- Support on [Discord](https://discord.useoptic.com).

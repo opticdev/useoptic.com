@@ -1,0 +1,95 @@
+---
+date: 2021-12-15
+title: "Working to make OpenAPI adoptable"
+author: Aidan Cunniffe
+description: Adopt OpenAPI and API-first practices
+author_url: "https://github.com/acunniffe"
+author_image_url: "/img/team/aidan.jpg"
+image: "https://i.imgur.com/WirV2j2l.jpg"
+category: OpenAPI
+---
+
+
+import {Blog} from "../../components/blog";
+
+
+<Blog title={"Working to make OpenAPI adoptable"} date={"2021-12-15"} author="aidan" image={"https://i.imgur.com/WirV2j2l.png"}  />
+
+
+
+![Adopt OpenAPI and API-first practices](https://i.imgur.com/WirV2j2l.jpg)
+
+
+Using OpenAPI and working API-first have clear benefits to every team building APIs, and yet, adopting these tools and practices is out of reach for most teams.
+
+
+
+[The 2021 Postman State of the API Report](https://www.postman.com/state-of-api/api-first-strategies/#api-first-strategies) - asked respondents where they stood embracing API first on a scale of 0-10. Only 16% of the respondents ranked their teams 8 or above, while the lion share (84%) ranked themselves 7 or below. It’s clear in the data, and from working in the community for years that most teams aspire to work API-first, but have not been able to put that practice into practice.
+
+## Why the gap?
+Almost every team we talk to at Optic buys the story the API space is selling, but has failed to get buy-in across their team and organization. The API space needs to start saying this out loud and fixing the problem. Here’s why we think API-first adoption is hard:
+
+**Working API-first asks a lot of developers, they have to start showing their work with OpenAPI:**
+
+- If their team is working code-first, that’s fine, but developers have to write down their API changes in OpenAPI contemporaneously. If the changes aren’t documented in the OpenAPI, their colleagues can’t review these changes before they go live.
+- If their team is working design-first, developers have a different challenge: implementing the design correctly, and proving to their team that the API implementation is working as designed.
+
+**Reviewing API changes is just as important as code review:**
+
+- Reading YAML OpenAPI diffs on GitHub is much more difficult than reading diffs of code. You have to do a lot of translation, dereferencing and jumping around to figure out what the diff actually means. If your specification uses `$refs` or is spit into multiple files, it’s even harder
+- Signal / noise ratio is very bad. If you’re reviewing for API design and stability — having to parse through OpenAPIs structural elements and the descriptions, extensions, examples, etc make it very hard to focus in on what needs reviewing.
+- One line of OpenAPI change, might be reused in 10 places. The same change could be breaking in some endpoints, but totally fine in others. How do you know?
+- We don’t have a way to write CI Checks against breaking changes and other significant updates to our spec. There’s Spectral…but it’s just a linter. It only processes one version of a spec at a time, and therefore can never be used to catch breaking changes.
+
+
+## Making OpenAPI developer friendly
+Ok…this is the fun part. Open source alert
+
+Optic 11 is going to fully support OpenAPI 3 when it launches. Not by generating OpenAPI, but rather by helping your developers write and review the OpenAPI files they already have. That means even if you already have a complete or partial API specification, you can start using Optic. And if you're hoping to make your first OpenAPI specification from scratch, Optic will help you get up to speed.
+
+We're keeping all the same ideas: diffing traffic, tracking changes, producing real changelogs, but with an entirely new engine.
+
+It's all about making it easy to start working API-first with your team. Here are some fun demos:
+
+### Track changes by collaborating with Optic
+
+No developer likes writing boilerplate OpenAPI, or the tedious work of figuring out where / how to document their recent work in OpenAPI accurately. Make your code changes, show them to Optic, and boom, documented for your team's review when you open the next PR.
+
+<iframe src="https://www.loom.com/embed/439fcb12836e4806880d6cab7631507b" width="100%" height="500" frameBorder="0" allowFullScreen/>
+
+### Prove your work with Optic
+
+But what if you're working design-first? The same diff engine that makes tracking changes possible can be used to tell you if your API implementation matches the planned changes your team designed. You will be able to use `optic prove` to verify any set of changes has been properly made.
+
+<div className="tailwind">
+<img src={"/img/terminals/prove.svg"} width={'70%'} className="shadow-md" />
+</div>
+
+### Review changes with Optic
+
+Once of the community's favorite features from Optic 10 was the compare page. It lets you review the diff between any two versions of the API specification so it's much easier to review that changes. The new version works with OpenAPI, and is designed to feel like the GitHub compare page, but for APIs. Imagine doing API review in a tool purpose built to make sure important API changes get talked about.
+
+<div className="tailwind">
+  <img src={"/img/changelog-temp-v0.png"} width={'70%'} className="shadow-md" />
+</div>
+
+
+### Write CI Checks with Optic
+
+Spectral is just a linter, it can't help you catch breaking changes or other consequential updates to your OpenAPI file. Optic CI lets you author CI Checks that help you govern how your APIs can be changed over time. It's a missing piece of the API stack you can start using today.
+
+<iframe src="https://www.loom.com/embed/b6349496ae844606ab7c9dfb7725c785" width="100%" height="500" frameBorder="0" webkitallowFullscreen mozallowFullscreen allowFullscreen/>
+
+
+---
+
+### Join the beta
+
+All this is launching soon, but if you want early access to these projects or are interested in shaping our roadmap, please sign up for the beta! We're really excited about what's been built the last month and are eager to help you and your teams start working API first.
+
+Have a great holiday season.
+
+Optic Maintainers
+
+
+

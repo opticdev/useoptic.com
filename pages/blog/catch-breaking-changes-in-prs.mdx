@@ -1,0 +1,84 @@
+---
+date: 2022-01-13
+title: "Catch breaking changes in Pull Requests"
+author: Aidan Cunniffe
+description: Write CI Checks about your API. A new open source project from Optic!
+author_url: "https://github.com/acunniffe"
+author_image_url: "/img/team/aidan.jpg"
+image: "https://i.imgur.com/latxjIG.png"
+category: OpenAPI
+---
+
+import {Blog} from "../../components/blog";
+
+<Blog title={"Catch breaking changes in Pull Requests"} date={"2022-01-13"} author="aidan" image="https://i.imgur.com/latxjIG.png" />
+
+
+**We’ll skip right to the good part**: add this 15 line GitHub Action to your repository and point it at your OpenAPI file. Once added Optic will catch breaking changes in CI before they affect your consumers.
+
+```yaml  title=".github/workflows/api-checks.yaml"
+name: optic-ci runner
+on: [ pull_request ]
+jobs:
+  optic-ci:
+    name: check for breaking changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run Optic CI
+        uses: opticdev/optic-ci-starter@main
+        with:
+          file: /path/to/openapi.yaml #change me
+          ruleset: default
+```
+
+
+
+
+This action runs one of our new open source tools called `optic-ci`. Here’s what it does:
+
+1. resolves two versions of your API specification — the one on your base branch, and the one on your head branch
+2. computes a semantic diff (changelog) between the two versions i.e. what’s changing in this PR
+3. runs a set of CI Checks on those changes to filter out any of the changes that are breaking
+4. if it finds breaking changes
+ 1. blocks the PR
+ 2. shows you exactly what changes introduced issues in “Files Changed”
+
+No need to sign up or pay for anything — `optic-ci` is free and open source. Just drop it in and start catching breaking changes
+
+<iframe src="https://www.loom.com/embed/b6349496ae844606ab7c9dfb7725c785" width="100%" height="500" frameBorder="0" webkitallowFullscreen mozallowFullscreen allowFullscreen/>
+
+### The need for API-centric CI Checks
+Optic helps teams track and review their API changes by making it easier for developers to work with OpenAPI and review each other's changes. Our tools have helped teams of all backgrounds start working API-first.
+
+Every developer on a team needs to feel empowered to make API changes and build new capabilities, without being afraid of accidentally introducing a breaking change. With `optic-ci` checks you can be confident that breaking changes, even the more elusive ones, get caught by your team’s automated API checks in the CI pipeline.
+
+Spectral can’t catch breaking changes because it only looks at one version of your specification at a time. In `optic-ci` rules about changes are easy to make. Here’s one of my favorites (included in the GitHub Action) which prevents a subtle breaking change: **adding a required query parameter.** That is breaking because clients would have to know to update their requests to include that required parameter or start getting unexpected 400s.
+
+You could write a Spectral rule that prevents query parameters from being required, but that’s not actually what we want here. Some query parameters can be required if there were there in the last version of the operation. What we really want is a rule that applies only to added query parameters. Optic lets you write that rule in 4 lines of code:
+
+```typescript
+request.queryParameter.added.must('not required', (queryParameter) => {
+  if (queryParameter.required)
+      expect.fail('adding a required query parameter is a breaking change')
+});
+```
+All breaking change checks are like the example above — they need more awareness of the API lifecycle to run at the right times.
+
+## Empowering developers
+
+When APIs break, its rarely the fault of developers. Nobody tries to break consumers or prematurely deprecate something — these mistakes happen because it is not always obvious how changing one or two lines of an OpenAPI file will impact users thousands of miles away. Defining a breaking change is hard, and most of them are subtle. Making the impact of changes and design choices visible long before code gets deployed helps everyone work more confidently and autonomously to improve the APIs.
+
+Breaking changes is the first use case we’re releasing, but stay tuned the next few weeks as more design and governance oriented API checks are open sourced.
+
+If you want to work closely with our team to set up `optic-ci` write custom rules, or contribute to the project [sign up for our beta](/book-demo)
+
+## Get started
+
+Go turn on `optic-ci` in your CI pipeline today! [Feedback welcome here](https://github.com/opticdev/optic/issues/new?assignees=&labels=optic-ci&template=OPTIC-CI.yml&title=%5BOptic-CI%5D%3A+), Support on [Discord](https://discord.useoptic.com).
+
+This has been really exciting to build! Stay tuned for more open source rulesets, case studies, and tools for authoring your own checks!
+

@@ -5,7 +5,8 @@ import '../style.css'
 
 export default function Nextra({
   Component,
-  pageProps
+  pageProps,
+  router
 }: AppProps): ReactElement {
   return <Component {...pageProps} />
 }

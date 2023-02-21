@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="537px" height="408px" viewBox="0 0 537 408" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>fulloptic</title>
+    <defs>
+        <filter x="-1.7%" y="-2.7%" width="103.5%" height="105.6%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="fulloptic" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" filter="url(#filter-1)" transform="translate(-178.000000, -20.000000)">
+            <g>
+                <rect id="Rectangle" stroke="#E1E6F7" fill="#F9F9F9" fill-rule="nonzero" x="1" y="1" width="714" height="448" rx="9.5"></rect>
+                <circle id="Oval" fill="#D3DAF2" fill-rule="nonzero" cx="220.5" cy="203.5" r="14.5"></circle>
+                <circle id="Oval" fill="#D3DAF2" fill-rule="nonzero" cx="220.5" cy="326.5" r="14.5"></circle>
+                <rect id="Rectangle" fill="#4F5F92" fill-rule="nonzero" x="214" y="56" width="120" height="13" rx="6"></rect>
+                <rect id="Rectangle" fill="#D6DCF0" fill-rule="nonzero" x="192" y="137" width="102" height="8" rx="4"></rect>
+                <rect id="Rectangle" fill="#BDC5DF" fill-rule="nonzero" x="252" y="196" width="102" height="8" rx="4"></rect>
+                <rect id="Rectangle" fill="#BDC5DF" fill-rule="nonzero" x="252" y="322" width="102" height="8" rx="4"></rect>
+                <rect id="Rectangle" fill="#E5E8F2" fill-rule="nonzero" x="252" y="222" width="74" height="5" rx="2.5"></rect>
+                <rect id="Rectangle" fill="#E5E8F2" fill-rule="nonzero" x="252" y="349" width="74" height="5" rx="2.5"></rect>
+                <rect id="Rectangle" fill="#E5E8F2" fill-rule="nonzero" x="252" y="249" width="90" height="5" rx="2.5"></rect>
+                <rect id="Rectangle" fill="#E5E8F2" fill-rule="nonzero" x="252" y="376" width="90" height="5" rx="2.5"></rect>
+                <rect id="Rectangle" fill="#CED4EA" fill-rule="nonzero" x="252" y="236" width="133" height="5" rx="2.5"></rect>
+                <rect id="Rectangle" fill="#CED4EA" fill-rule="nonzero" x="252" y="363" width="133" height="5" rx="2.5"></rect>
+                <rect id="Rectangle" fill="#D6DCF0" fill-rule="nonzero" x="467" y="138" width="79" height="8" rx="4"></rect>
+                <rect id="Rectangle" fill="#9CA7CB" fill-rule="nonzero" x="469" y="59" width="50" height="7" rx="3.5"></rect>
+                <rect id="Rectangle" fill="#9CA7CB" fill-rule="nonzero" x="578" y="59" width="73" height="7" rx="3.5"></rect>
+                <path d="M554.822849,63.4742074 L548.506288,59.8126636 C547.562561,59.2659218 546.555718,60.4224128 547.207911,61.3055328 L554.075481,70.5940452 C554.459183,71.112332 555.218573,71.1387545 555.636338,70.6479064 L571.743819,51.6928371 C572.548292,50.7467096 571.284979,49.4469276 570.341252,50.2517965 L554.822849,63.4742074 Z" id="Path" fill="#4CA480" fill-rule="nonzero"></path>
+                <path d="M447.822849,63.4742074 L441.506288,59.8126636 C440.562561,59.2659218 439.555718,60.4224128 440.207911,61.3055328 L447.075481,70.5940452 C447.459183,71.112332 448.218573,71.1387545 448.636338,70.6479064 L464.743819,51.6928371 C465.548292,50.7467096 464.284979,49.4469276 463.341252,50.2517965 L447.822849,63.4742074 Z" id="Path" fill="#4CA480" fill-rule="nonzero"></path>
+                <rect id="Rectangle" stroke="#C7CFEA" stroke-width="3" x="191" y="33" width="490" height="56" rx="4"></rect>
+                <rect id="Rectangle" stroke="#D6DDF3" stroke-width="3" x="191" y="164" width="230" height="114" rx="4"></rect>
+                <rect id="Rectangle" stroke="#D6DDF3" stroke-width="3" x="191" y="291" width="230" height="114" rx="4"></rect>
+                <rect id="Rectangle" fill="#4F5F92" fill-rule="nonzero" x="467" y="180" width="33" height="31" rx="3"></rect>
+                <rect id="Rectangle" stroke="#A0A9C4" stroke-width="2" x="468" y="279" width="31" height="29" rx="2"></rect>
+                <rect id="Rectangle" stroke="#A0A9C4" stroke-width="2" x="468" y="325" width="31" height="29" rx="2"></rect>
+                <path d="M480.3528,196.54963 L475.543694,193.732462 C474.58555,193.170877 473.549774,194.329981 474.206583,195.227286 L479.585672,202.581284 C479.976897,203.116176 480.762412,203.142869 481.189388,202.636723 L493.745364,187.702862 C494.556415,186.737797 493.254034,185.439067 492.299976,186.260398 L480.3528,196.54963 Z" id="Path" fill="#FAFAFA" fill-rule="nonzero"></path>
+                <rect id="Rectangle" fill="#4F5F92" fill-rule="nonzero" x="467" y="226" width="33" height="31" rx="3"></rect>
+                <path d="M480.3528,243.54963 L475.543694,240.732462 C474.58555,240.170877 473.549774,241.329981 474.206583,242.227286 L479.585672,249.581284 C479.976897,250.116176 480.762412,250.142869 481.189388,249.636723 L493.745364,234.702862 C494.556415,233.737797 493.254034,232.439067 492.299976,233.260398 L480.3528,243.54963 Z" id="Path" fill="#FAFAFA" fill-rule="nonzero"></path>
+            </g>
+        </g>
+        <text id="Must-follow-public-s" font-family="UbuntuMono-Bold, Ubuntu Mono" font-size="11" font-weight="bold" letter-spacing="0.785714361" fill="#090713">
+            <tspan x="330" y="177">Must follow public-standards</tspan>
+        </text>
+        <text id="Review-required-(new" font-family="UbuntuMono-Bold, Ubuntu Mono" font-size="11" font-weight="bold" letter-spacing="0.785714361" fill="#090713">
+            <tspan x="330" y="225">Review required (new operations)</tspan>
+        </text>
+        <text id="No-breaking-changes" font-family="UbuntuMono-Bold, Ubuntu Mono" font-size="11" font-weight="bold" letter-spacing="0.785714361" fill="#090713">
+            <tspan x="330" y="277">No breaking changes</tspan>
+        </text>
+        <text id="Tests-must-cover-any" font-family="UbuntuMono-Bold, Ubuntu Mono" font-size="11" font-weight="bold" letter-spacing="0.785714361" fill="#090713">
+            <tspan x="330" y="322">Tests must cover any API changes </tspan>
+        </text>
+    </g>
+</svg>
