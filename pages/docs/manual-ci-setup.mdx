@@ -1,0 +1,51 @@
+# Running Optic Commands in CI
+
+You can run Optic in any CI provider.
+
+**Prerequisites:**
+
+- Install the Optic CLI `npm install -g @useoptic/optic`. You will need to use an image with Node/NPM on it
+- You will need to get a Token from Optic Cloud and add it as a secret named `OPTIC_TOKEN`
+  <img
+    style={{ border: "1px solid #e2e2e2", marginBottom: 16 }}
+    src="/img/token.png"
+  />
+- OpenAPI specifications in the repo are [tracked by Optic Cloud](/docs/add-apis)
+- A Token from GitHub or GitLab with commenting scopes so the Optic CLI can write back to your PR with a changelog comment and status.
+
+### Git Fetch depth
+
+Optic `diff` compares your OpenAPI files across branches and commits. Some CI providers do shallow clones of the git repository. You may need to run git fetch to ensure you have the correct history in the git database before Optic can run. Make sure you fetch both the `base` and the `head` branches for the PR. Usually there are environment variables set by the CI provider that give you this information.
+
+```bash
+git fetch --no-tags --depth=1 origin $PR_BRANCH_HEAD
+git fetch --no-tags --depth=1 origin $PR_BRANCH_BASE
+```
+
+### Run Optic Diff
+
+Next your should run `optic diff-all` against your PR's `base` branch. Again, usually there is an environment variable set by the CI provider that will give you the branch name or commit SHA:
+
+```
+optic diff-all --compare-from $PR_BRANCH_BASE --check
+```
+
+### (For GitHub) Comment on the PR
+
+Add a new CI secret `GITHUB_TOKEN`. This token should be a GitHub Action token or an access token for a bot account with permission to comment on PRs. After you run `diff-all`, run the comment command and pass in metadata about the PR, repo, sha, etc. This is used by Optic to know which PR to comment on.
+
+```
+optic ci comment --provider github --owner $GITHUB_ORG_NAME --repo $GITHUB_REPO_NAME --pull-request $PR_NUMBER --sha $HEAD_GIT_SHA
+```
+
+### (For GitLab) Comment on the PR
+
+Add a new CI secret `GITLAB_TOKEN`. This token should be a group access token or a personal access token for a bot account with permission to comment on PRs. After you run `diff-all`, run the comment command and pass in metadata about the PR, repo, sha, etc. This is used by Optic to know which PR to comment on.
+
+```
+optic ci comment --provider gitlab --owner $GITHUB_ORG_NAME --repo $GITHUB_REPO_NAME --pull-request $PR_NUMBER --sha $HEAD_GIT_SHA
+```
+
+---
+
+### Need Help? [Set up office hours with the Optic team](https://calendly.com/optic-onboarding/optic-office-hours)

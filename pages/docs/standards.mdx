@@ -1,0 +1,58 @@
+---
+title: Setting API Standards
+description: Build an API style guide that raises the quality of every API you ship
+---
+
+# Setting API Standards
+
+Whenever your API specification changes, Optic can help check that your team's API Standards are being followed.
+
+You can enforce several kinds of rules:
+
+- **Lint rules** - OpenAPI is valid / being used correctly
+- **Change rules** - No breaking changes and the versioning policy is being followed
+- **Style guides** - API designs are consistent and follow a set of conventions
+
+Optic runs all these rules at the same time, and provides a unified output so developers only have to look for issues one place. If you have existing [Spectral rulesets](/docs/standards/using-spectral), you can run those with Optic as well.
+
+### Setting your standards
+
+There are several standards supported by Optic's open source community. The `breaking-changes` and `naming` standards are the most popular standards teams adopt when starting out with Optic.
+
+You can try them yourself by adding an `optic.dev.yml` file to your repository:
+
+**optic.dev.yml**
+
+```yaml
+ruleset:
+  - breaking-changes
+  - naming:
+      applies: added
+      pathComponents: camelCase
+      requestHeaders: Capital-Param-Case
+      queryParameters: Capital-Param-Case
+```
+
+Now when you run `optic diff` breaking changes will emit issues, and any added path components, headers or query parameters that violate the casing rules will fail.
+
+<img
+  src="/img/checks-fail.png"
+  width="400"
+  style={{ border: "1px solid #e2e2e2" }}
+/>
+
+### Sharing standards across your team
+
+Most teams that use Optic have dozens or even hundreds of OpenAPI descriptions. Depending on how you organize your OpenAPI files and repositories, there are several strategies for sharing the standards.
+
+- **If you have a single repository that contains all your OpenAPI descriptions**, put the `optic.dev.yml` file in the root of that repository
+- **If you have multiple repositories that contain one or more OpenAPI descriptions**, put the `optic.dev.yml` in each one. If this becomes difficult to maintain, consider using Optic Cloud.
+- **If you use Optic Cloud**, rulesets can be configured in the dashboard and applied to each OpenAPI file without updating CI or adding `optic.dev.yml` files to each repo. This is the best option at scale.
+
+After configuring the rules in `optic.dev.yml` files or on Optic Cloud, any developer should be able to run the standards locally by running the standard diff command. The tool will pick up their configuration and apply the correct standards automatically:
+
+```
+optic diff openapi.yaml --base main
+```
+
+When you are ready to run the standards in your CI Pipelines [read this "Running in CI" guide](/docs/running-in-ci).

@@ -1,0 +1,35 @@
+# Share docs with your team
+
+Optic makes it easy to share your OpenAPI documentation with other people on your team, and consumers across your organization.
+
+![alt](/img/docs.png)
+
+Just login:
+
+```bash
+optic login
+```
+
+And add your OpenAPI specs:
+
+```
+optic api add service-a/openapi.yml
+```
+
+If you want to add all the OpenAPI specs in a repo, you can run:
+
+```
+optic api add --all
+```
+
+![alt](/img/api-add.png)
+
+You'll notice one line was added to each file: `x-optic-url`. Optic uses this pointer to uniquely identify this OpenAPI in CI and on other developer's machines. Commit this change to your version control system.
+
+---
+
+### Invite your team.
+
+[Optic Cloud is free for up to 20 developers](/pricing). Admins can invite new users. We work with enterprise customers to integrate SSO and other login options:
+
+![alt](/img/team-add.png)

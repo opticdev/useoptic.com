@@ -1,0 +1,79 @@
+#  GitHub Optic Integration
+
+_If you use another CI provider with GitHub [follow these docs instead](/docs/manual-ci-setup)._
+
+### 1. Add GitHub Action
+
+Open your git repository and run the following command to generate `./github/workflows/optic.yaml`
+
+```
+optic ci setup
+```
+
+You can also create the workflow file manually and copy the contents below:
+
+```yaml
+name: optic
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  diff-all:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: opticdev/action@v1
+        with:
+          # Your Optic Cloud Token
+          optic_token: ${{ secrets.OPTIC_TOKEN }}
+
+          # A GitHub token with access to create comments on pull requests
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+          # If true, standard check failures will cause this action to fail.
+          # If false, standard check failures will show in PR comments and in Optic Cloud but will not cause the action to fail
+          standards_fail: false
+```
+
+The Optic GitHub action is [open source and lives here](https://github.com/opticdev/action)
+
+### 2. Add an Optic CI Token to your CI Environment
+
+You will need to provide the workflow running Optic a secret CI token. Navigate to the `Tokens` tab in Optic Cloud and click "New"
+
+<img
+  style={{ border: "1px solid #e2e2e2", marginBottom: 16 }}
+  src="/img/token.png"
+/>
+
+Then copy that token to the [GitHub Actions Secrets for your project](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository). You can do this on GitHub's UI or with their `gh` CLI:
+
+```bash
+gh secret set OPTIC_TOKEN
+```
+
+### 3. Enable GitHub Action to comment
+
+In GitHub navigate to `Repo > Settings > Actions > General` and set `Workflow permissions` to `Read and write permissions`.
+
+<img
+    style={{ border: "1px solid #e2e2e2", marginBottom: 16 }}
+    src="/img/github-permissions.png"
+/>
+
+
+### 4. Open a Pull Request
+
+Commit the workflow file and open a Pull Request. Wait for the Optic CI Action to run. It will fail if your CI token is invalid or if the workflow has been set up improperly.
+
+If you want to see how the Action works, make some test changes to one of the tracked OpenAPI files and commit to this branch (just remember to revert when you are done).
+
+
+---
+
+### Need Help? [Set up office hours with the Optic team](https://calendly.com/optic-onboarding/optic-office-hours)

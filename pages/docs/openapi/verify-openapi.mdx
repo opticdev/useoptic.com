@@ -1,1 +1,114 @@
-# why optic
+import Video from "../../../components/video";
+
+# Verify OpenAPI Accuracy
+
+One of the most frustrating things for consumers is when an API is not behaving as documented. No team sets out to ship versions of their API that are out of sync with the documentation -- it happens because verifying API behavior is hard. With Optic you can verify the API behavior in CI and understand your API Test Coverage (the % of your API functionality your testing covered). If `optic oas verify` detects no diffs, and you have high coverage, you can be very confident your API is working as-designed.
+
+<div className="tailwind">
+    <Video
+        src="/video/api-verify.mp4"
+        poster="/video/verify.png"
+        caption="Verify your API Behavior"
+    />
+</div>
+
+### 1. Capturing traffic from the correct environment
+
+When verifying API behavior, it is important to verify collected traffic against the correct version of your OpenAPI file. We suggest running `verify` as part of your CI process, so it is difficult for your API to drift. Running `verify` against deployed environments is still useful and will catch API drift, but since those issues have already been released it is less valuable.
+
+Optic can collect traffic from subprocesses to help you capture a lot of traffic quickly:
+
+Running with your tests. Note: If your tests do not actually hit the network, Optic will not be able to see them. You may need to change how they run, or export a HAR from your test suite instead. We can help with this [(set up office hours)](https://calendly.com/optic-onboarding/optic-office-hours).
+
+```bash
+optic oas capture openapi.yaml http://api.local.dev --command 'go test'
+```
+
+Many teams use a combination of API testing tools like Postman, their code tests, a fuzzer, etc. Others have a manual QA phase that will result in the usage of a lot of the API surface area. Optic lets you join these captures into one big capture by running them sequentially:
+
+```bash
+optic oas capture openapi.yaml http://api.local.dev --command 'go test'    # Go Tests
+optic oas capture openapi.yaml http://api.local.dev --command 'newman run' # Postman's Newman runner
+optic oas capture openapi.yaml http://api.local.dev                        # A manual capture
+```
+
+### 2. Run `verify`
+
+This command compares the traffic you collected to your API's actual behavior.
+
+```bash
+optic oas verify openapi.yaml
+```
+
+In the example below Optic found one diff and provided a coverage report showing 72% of the API's functionality had been tested
+
+```bash
+» Verifying API behavior...
+
+[ Diff ]  'site_admin' is not documented
+operation: get /gists/{gistId}
+154 | properties:
+155 |   user:
+156 |     type: object
+157 |     properties:  Undocumented 'site_admin'
+158 |       login:
+159 |         type: string
+160 |       id:
+  openapi.yaml
+  (use "--patch" to update)
+
+
+API Behavior Report
+
+Total Requests          : 128
+Diffs                   : 1
+Undocumented operations : 0
+Undocumented bodies     : 0
+
+Coverage Report 72.7%
+●●●●   get /users/{user}/followers
+ 60   200
+●●◌◌   get /users/{user}/starred
+ 25
+●●◌◌   get /gists/{gistId}
+ 17   200
+●●◌◌   get /users/{user}/gists
+ 16   200
+●◌◌◌   get /users
+ 10   200
+◌◌◌◌   get /users/{user}/subscriptions
+  0   200
+
+OpenAPI and implementation are out of sync. Exiting 1
+```
+
+Since the process exits 1 when there are diffs, `verify` works great as a CI check that ensures your API and OpenAPI are in sync before every merge.
+
+To resolve the issue above you can manually document `site_admin` or [have Optic do it for you with `--patch`](/docs/update-from-traffic). After collecting traffic again and running `verify` there are no more diffs and the process exits 0.
+
+```bash
+ » Verifying API behavior...
+
+ API Behavior Report
+
+ Total Requests          : 128
+ Diffs                   : 0
+ Undocumented operations : 0
+ Undocumented bodies     : 0
+
+ Coverage Report 75.0%
+ ●●●●   get /users/{user}/followers
+   60   200
+ ●●◌◌   get /users/{user}/starred
+   25   200
+ ●●◌◌   get /gists/{gistId}
+   17   200
+ ●●◌◌   get /users/{user}/gists
+   16   200
+ ●◌◌◌   get /users
+   10   200
+ ◌◌◌◌   get /users/{user}/subscriptions
+    0   200
+
+No diffs detected. OpenAPI and implementation appear to be in sync.
+```

@@ -1,0 +1,22 @@
+Optic Cloud makes it easy to run Optic is CI, share documentation and full history of every APIs with your team, and allow developers to subscribe to each other's API changes. First create an Optic Cloud account and login:
+
+    ```
+optic login
+```
+
+Open one of your API projects and run the `add` command with an OpenAPI specification:
+
+    ```
+optic api add specs/account-service-openapi.yml
+```
+
+Now this OpenAPI spec is being tracked by Optic. You will notice:
+
+    - This API's documentation appears in Optic Cloud, along with its recent history.
+- One line was added to your OpenAPI file `x-optic-url`. Optic uses this pointer to uniquely identify this OpenAPI in CI and on other developer's machines. Commit this to your version control system.
+
+If you have a lot of OpenAPI specs in a monorepo, you might want to add multiple specs at once. You can always come back and add more specs later so it is ok to skip this step for now.
+
+```
+optic api add --all
+```

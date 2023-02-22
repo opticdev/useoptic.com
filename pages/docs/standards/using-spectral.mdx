@@ -1,0 +1,57 @@
+---
+title: Running Spectral Rules
+description: Automate API Style Guides without getting in the way of developers
+---
+
+# Running Spectral Rules
+
+[Spectral](https://github.com/stoplightio/spectral) is a great open source API linter that many teams use to automate their API Style Guides. Linting an OpenAPI file works great when you are designing a brand-new API, but it presents some [challenges](https://www.useoptic.com/blog/beyond-api-linting) if you apply those style guides to existing/legacy APIs.
+
+1. Existing APIs may not follow your latest standards and fixing them might not be an option. For instance, changing a property's name from `snake_case` to `camelCase` might fix a failing Spectral lint rule, but it also introduces a breaking change. Catch-22
+2. Making developers change their API design and implementation months/years after they build the API can disrupt teams across your company. Everyone should have to make important changes (like adding security), but most other style guides do not need to apply to existing APIs immediately.
+
+The signal / noise ratio gets really high because there can be hundreds of lint errors you cannot resolve. Many teams have had to walk back their style guides because they were getting in the way and developers did not like it. We've seen teams turn off checks for pagination, consistency, and other best practices because having those rules in place would fail the majority of their existing OpenAPIs.
+
+**The solution is simple: Spectral Plus (Optic + Spectral):**
+
+Optic lets you break up your existing spectral rulesets into two buckets: rules that run everywhere all the time (`always`), and rules that only run on (`additions`).
+
+Have a rule that all enums should be `snake_case`? If you apply that rule on `added` only new enums will have to follow it -- the existing ones will be skipped. Same for pagination, your latest naming rules, the latest style for different kinds of operations (ie post, gets, patches, etc.).
+
+```yaml title=optic.dev.yml
+rulesets:
+  - spectral:
+      added:
+        - pagination.spectral.yml
+        - latest-naming.spectral.yml
+      always:
+        - security.spectral.yml
+        - metadata.spectral.yml
+```
+
+Optic uses the `spectral` CLI under the hood. Any ruleset that [runs with the `-r --ruleset` flag can be used with Optic](https://docs.stoplight.io/docs/spectral/9ffa04e052cc1-spectral-cli#using-a-ruleset-file), including modules, urls, and local YAML files.
+
+```yaml title=optic.dev.yml
+rulesets:
+  - spectral:
+      added:
+        - pagination.spectral.yml # local file
+        - https://raw.github.com/gist/spectral-rule.yml # url to yaml
+        - https://raw.github.com/gist/spectral-custom.js # url to js
+        - our-api-standards # node module
+```
+
+Now when you run `optic diff` Spectral runs too. Optic computes the changes between your current branch and the main branch. Now that it knows about your API changes, Optic can run your `added` Spectral rules on additions, and your `always` Spectral rules on everything else:
+
+```bash
+optic diff --check openapi.yaml --base main
+```
+
+You can read the [full documentation]for the `diff` command here](/docs/diff-openapi).
+
+**Outcomes**
+
+- Better compliance and happier developers
+- The ability to add more advanced Style Guides without worrying they will fail for the existing teams.
+- Fewer breaking changes
+- Your spectral rules will show up in the Optic changelog

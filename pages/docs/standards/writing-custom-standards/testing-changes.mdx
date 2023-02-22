@@ -1,0 +1,79 @@
+---
+title: Testing Changes
+description: Learn what is possible with Optic's custom rulesets
+---
+
+# Testing Changes
+
+Optic rules are attached to specific parts of the OpenAPI specification i.e. `operation`, `property`, `request`, `response`, `parameter`. You can write a simple `OperationRule` that runs on every `operation` in the specification. These rules behave like visitors, running one after the one as the rules engine traverses your specification.
+
+**What** part of the spec the rule runs on
+
+```typescript
+new OperationRule({
+  name: "all operations must x",
+  rule: (operation) => {...},
+});
+```
+
+This simple idea can be extended. A `matches` predicate can be used to filter which `operation`, `response` etc. nodes this rule applies to. For instance only matching `post` `operations`:
+
+**Which** of the parts of the spec the rules apply too
+
+```typescript
+new OperationRule({
+  name: "all post operations must x",
+  matches: (operation) => operation.method === 'post',
+  rule: (operation) => {...},
+});
+```
+
+Since Optic understands how your API has changed over time, you can trigger your rules when specific kinds of changes happen (`added`, `changed`, or `removed`). This is useful for catching breaking changes, and using automated rules to enforce your team's versioning policy:
+
+**When** the rule should run
+
+```typescript
+new ResponseBodyRule({
+  name: "prevent making response property optional",
+  rule: (responseAssertions) => {
+    // is triggered by changes to response body properties (no JSON Path required)
+    responseAssertions.property.changed((before, after) => {
+      // check if required has changed
+      if (before.value.required && !after.value.required) {
+        throw new RuleError({
+          message: "cannot make a required response property optional",
+        });
+      }
+    });
+  },
+});
+```
+
+### Grouping rules into Rulesets
+
+Many teams have invested in writing an API Style Guide that details patterns for everything from Auth to Pagination. With Spectral these kinds of standards are difficult to group and apply hierarchically. Optic allows you to group rules into a Ruleset that runs on specific parts of the specification:
+
+```typescript
+const postEndpointsRuleset = new Ruleset({
+  name: "POST operations standards",
+  // A link to your API standards (will direct users here when rule fails)
+  docsLink: "https://optic.com/standards/post-operations",
+  // The rules only run on post
+  matches: (context) => context.operation.method === "post",
+  rules: [
+    hasStandardAuthentication,
+    hasJsonRequestBody,
+    returnsIdempotentHeader,
+    has201StatusCode,
+    has400StatusCode,
+    has403StatusCode,
+  ],
+});
+```
+
+Rulesets allow you to write your `matches` logic in one place, making it easier to re-use the independent rules across your entire set of API standards. We suggest teams begin by figuring out which API Standards they want to enforce with Optic and start by writing the Ruleset groupings. This will keep the code organized from the start and make it easier to maintain:
+
+1. Group your team’s API Standards into several `Rulesets`. By HTTP Method is usually a good place to start
+2. Write down the API Standards that apply to every operation, across all the groups from step 1. Usually these are things like required headers, content types, breaking change rules, etc.
+3. Write code to define all your the `Rulesets` and the matchers that will qualify them `matches`
+4. Start writing Rules, and add them to the `rules` property of the `Rulesets` where they apply.

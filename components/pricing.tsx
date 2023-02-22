@@ -70,11 +70,11 @@ export default function Example() {
       <div className="flow-root bg-gray-900 pt-24 pb-16 sm:pt-32 lg:pb-0">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative z-10">
-            <h2 className="mx-auto max-w-4xl text-center text-5xl font-bold nx-leading-1 text-white">
-              Optic Cloud is your API Catalogue
+            <h2 className="mx-auto max-w-6xl text-center text-5xl font-bold nx-leading-1 text-white">
+              Optic Cloud is your team's API Catalogue
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg leading-8 text-white/60">
-              Get the benefits of using OpenAPI, without all the effort.
+              Optic makes documentation for all your team's APIs available in the same place. When the APIs you depend on change, Optic notifies you.
             </p>
             <div className="mt-16 flex justify-center">
               <RadioGroup

@@ -1,0 +1,177 @@
+---
+title: Writing Custom API Standards
+description: Learn what is possible with Optic's custom rulesets
+---
+
+# Writing Custom API Standards
+
+
+Rules can be written about the main entities in your OpenAPI specification. You can click into any of the items in this list to learn more about how to write a rule:
+
+### Rule References
+
+- [Operations](/docs/standards/writing-custom-standards/operation)
+- [Request](/docs/standards/writing-custom-standards/request)
+- [Response](/docs/standards/writing-custom-standards/response)
+- [Property](/docs/standards/writing-custom-standards/schema-property)
+- [OpenAPI metadata](/docs/standards/writing-custom-standards/specification)
+
+### Controlling when the rule runs
+
+There are 5 different lifecycles you can attach a rule onto. These lifecycles determine when a rule should be run. The 5 lifecycles are: `added`, `changed`, `addedOrChanged`, `removed` and `requirement`.
+
+- `added` - runs when added
+- `changed` - runs when changed
+- `addedOrChanged` - runs when added or changed
+- `removed` - runs when removed
+- `requirement` - always runs
+
+For example, a query parameter assertion with an added rule lifecycle (below) will run every time a query parameter is added.
+
+```javascript
+new OperationRule({
+  ...,
+  rule: (operationAssertions) => {
+    operationAssertions.queryParameter.added('not add a required query parameter', () => {
+      // rule implementation goes here
+    })
+  }
+})
+```
+
+#### Assertion Helpers
+
+Often, there are common cases you might want to write rules for, such as "operation has query parameter" or "response body has a certain shape". Optic includes helpers to write these assertions more easily.
+
+**Operations helpers**
+
+```javascript
+new OperationRule({
+  ...,
+  rule: (operationAssertions) => {
+    // On operation change, checks whether the operation has a request(s) with content type
+    operationAssertions.changed.hasRequests([
+      { contentType: 'application/json' },
+    ]);
+
+    // On operation added, checks whether the operation has a response(s) with content type + status code
+    operationAssertions.added.hasResponses([
+      { statusCode: '200' }, // This checks for just the status code
+      { statusCode: '400', contentType: 'application/json' }, // This expects a status code _with_ content-type
+    ]);
+
+    // Looks for a parameter that matches the shape specified
+    // matches against the raw value from the OpenAPI specification
+    operationAssertions.requirement.hasHeaderParameterMatching({
+      name: 'X-Authorization',
+    });
+    operationAssertions.requirement.hasQueryParameterMatching({
+      description: Matchers.string, // Looks for a description that has a string
+    });
+    operationAssertions.requirement.hasPathParameterMatching({
+      description: Matchers.string,
+      name: 'userId'
+    });
+  },
+});
+```
+
+**Request helpers:**
+
+```javascript
+new RequestRule({
+  ...,
+  rule: (requestAssertions) => {
+    // Expects a partial match that the request is an object with an id: string
+    requestAssertions.body.added.matches({
+      schema: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+        },
+      },
+    });
+  },
+});
+```
+
+**Response helpers:**
+
+```javascript
+const ruleRunner = new RuleRunner([
+  new ResponseRule({
+    ...,
+    rule: (responseAssertions) => {
+      // Matches a response header with name `X-Application' with a description type string
+      responseAssertions.requirement.hasResponseHeaderMatching('X-Application', {
+        description: Matchers.string,
+      });
+    },
+  }),
+]);
+
+new ResponseBodyRule({
+  ...,
+  rule: (responseBodyAssertions) => {
+    // Expects a partial match that the response body is an object with an id: string
+    responseBodyAssertions.body.added.matches({
+      schema: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+        },
+      },
+    });
+  },
+});
+```
+
+### Matcher helpers
+
+`.matches` assertion helpers can be used to match expected open api shapes. By default, `.matches` does a partial match, meaning that if the received value has extra keys, matches will still recognize it as a match:
+
+```javascript
+.matches({
+  description: 'api description'
+})
+
+will match the following objects
+{
+  description: 'api description'
+}
+
+{
+  description: 'api description',
+  tags: ['get', 'examples']
+}
+```
+
+Matches can be configured with a second argument - `assertion.added.matches(structureToMatch, options)`
+
+The following table describes the options object.
+
+| property     | description                                                       | required | type      |
+| ------------ | ----------------------------------------------------------------- | -------- | --------- |
+| strict       | runs a partial match if false, otherwise looks for an exact match | no       | `boolean` |
+| errorMessage | provide a custom error message if this matches block fails        | no       | `string`  |
+
+Additionally, if you want to define custom matchers, you can use the following helpers:
+
+```javascript
+import { Matcher, Matchers } from "@useoptic/rulesets-base";
+
+assertion.added.matches({
+  description: Matchers.string, // matches any string
+  ["x-enabled"]: Matchers.boolean, // matches any boolean
+  ["x-version"]: Matchers.number, // matches any number
+});
+
+// Additionally you can create your own custom matcher
+const urlMatcher = new Matcher(
+  (value: any) => typeof value === "string" && /^https?/i.test(value)
+);
+```

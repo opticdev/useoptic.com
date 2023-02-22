@@ -1,5 +1,8 @@
 {
-  "why-optic": "Why Optic",
+  "why-optic": {
+    "title": "Why Optic?",
+    "display": "hidden"
+  },
   "index": "Get Started",
   "core-concepts": "Core Concepts",
   "-- Guides": {
@@ -9,15 +12,24 @@
   "openapi": {
     "title": "Accurate OpenAPI"
   },
-  "documentation": {
-    "title": "Share with your team"
+  "share-docs-with-your-team": {
+    "title": "Share docs with your team"
+  },
+  "diff-openapi": {
+    "title": "Prevent breaking changes"
+  },
+  "running-in-ci": {
+    "title": "Running in CI"
   },
   "standards": {
-    "title": "Improve your APIs"
+    "title": "Setting API Standards"
   },
   "-- Reference": {
     "type": "separator",
     "title": "Reference"
   },
-  "oas-reference": "Capturing Traffic"
+  "oas-reference": "Capturing Traffic",
+  "github": "GitHub CI Recipe",
+  "gitlab": "GitLab CI Recipe",
+  "manual-ci-setup": "Other CI Providers"
 }

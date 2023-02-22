@@ -1,0 +1,95 @@
+
+# GitLab Optic Integration
+
+_If you use another CI provider with GitLab [follow these docs instead](/docs/manual-ci-setup)._
+
+### 1. Add GitLab Pipeline
+
+Open your git repository and run the following command to generate `.gitlab-ci.yml`
+
+```
+optic ci setup
+```
+
+You can also create the workflow file manually and copy the contents below:
+
+```yaml
+# This script handles two different events in two different ways.
+#
+# For a push event on the default branch, it simply runs a diff against the
+# previous version and upload the run. That keeps a running log of the history
+# of your default branch.
+#
+# For a merge request, it runs a diff against the base of the merge request. That
+# gives you a set of changes that have occurred in the merge request. It also
+# runs `optic ci comment` to add a comment to the merge request, giving you a
+# a summary of the changes and checks you've run right in the merge request web
+# interface.
+
+# on push, diff with the previous commit
+optic-diff-push:
+  image: node:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  script:
+    - npm install -g @useoptic/optic
+    - optic diff-all --check
+
+# on merge request, diff with the base and post a comment
+optic-diff-merge-request:
+  image: node:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $OPTIC_TOKEN
+  script:
+    - npm install -g @useoptic/optic
+    - git fetch origin --depth=1 $CI_MERGE_REQUEST_DIFF_BASE_SHA
+
+    # run optic diff and record the result, but don't fail if optic fails
+    - export OPTIC_RESULT=0; optic diff-all --check --compare-from $CI_MERGE_REQUEST_DIFF_BASE_SHA || export OPTIC_RESULT=$?
+
+    # add a comment on the merge request
+    - if [ -n "${OPTIC_GITLAB_TOKEN}" ]; then GITLAB_TOKEN=$OPTIC_GITLAB_TOKEN optic ci comment --provider gitlab --project-id $CI_PROJECT_ID --merge-request-id $CI_MERGE_REQUEST_IID --sha $CI_COMMIT_SHA; fi;
+
+    # comment out the next line if you don't want to fail CI when checks fail
+    # - if [ $OPTIC_RESULT -ne 0 ]; then exit 1; fi;
+```
+
+### 2. Add an Optic CI Token to your CI Environment
+
+You will need to provide the workflow running Optic a secret CI token. Navigate to the `Tokens` tab in Optic Cloud and click "New"
+
+<img
+  style={{ border: "1px solid #e2e2e2", marginBottom: 16 }}
+  src="/img/token.png"
+/>
+
+Then copy that token to the [Project or Group settings for your project](https://docs.gitlab.com/ee/ci/variables/#define-a-cicd-variable-in-the-ui). The pipeline expects you to name this variable `OPTIC_TOKEN`.
+
+### 3. Create a token for the Commenting
+
+Optic posts a visual changelog to every Merge Requests that change OpenAPI files it is tracking. In order to write that comment, you will need to give the Optic Pipeline a Group Access Token, or a Project Access Token, or a Personal Access Token with the `api` scope:
+
+
+<img
+  style={{ border: "1px solid #e2e2e2", marginBottom: 16 }}
+  src="/img/gitlab-scopes.png"
+/>
+
+
+We strongly recommend using a [Group Access Token](https://docs.gitlab.com/ee/user/group/settings/group_access_tokens.html#create-a-group-access-token-using-ui) because:
+
+- it is what GitLab recommends
+- comments will come from a group bot, not your personal account
+- the same token can be used across all the projects in a group
+
+
+### 3. Open a Merge Request
+
+Commit the new CI pipeline and open a Merge Request. Wait for the Optic pipeline to run. It will fail if your CI token is invalid or if the pipeline has been set up improperly.
+
+If you want to see how an Optic changelog, make some test changes to one of the tracked OpenAPI files and commit to this branch (just remember to revert when you are done).
+
+
+---
+
+### Need Help? [Set up office hours with the Optic team](https://calendly.com/optic-onboarding/optic-office-hours)

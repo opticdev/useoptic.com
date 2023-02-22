@@ -1,0 +1,84 @@
+import Video from "../../components/video";
+import {Callout} from "nextra-theme-docs";
+
+# Prevent breaking changes
+
+Optic can [compute the changes](/docs/core-concepts#spec-to-spec) between any two OpenAPI versions. This makes it easy to catch breaking changes in development and CI, long before they make it to production and break a consumer.
+
+The `diff` command integrates with Git to make comparisons easy:
+
+```bash
+optic diff openapi.yml --base main --check
+```
+
+- `--base` is the base branch you want to compare your recent changes to
+- `--check` tells Optic to check the changes. You can learn how to configure breaking changes and other checks here
+
+<Callout>
+    **Note on history**:
+    `optic diff` works off the objects in your local copy. If you are seeing different results running locally than in CI, make sure you've fetched the latest commits.
+
+    **Note on new OpenAPI files**:
+    If you add a new OpenAPI file (for instance for a new microservice), and it only exists in your HEAD branch, Optic will compare it to an empty OpenAPI file. Most of the time this has the expected behavior: everything in the spec will be marked as `added`.
+
+</Callout>
+
+<div className="tailwind">
+    <Video
+        src="/video/breaking-changes.mp4"
+        poster="/video/breaking-changes.png"
+        caption="Prevent Breaking Changes"
+    />
+</div>
+
+
+#### Visual Changelogs
+
+Reading a line diff of a large OpenAPI file is difficult, especially when you use `$ref` throughout the spec. Optic will visualize the effective API changelog if you pass the `--web` flag making it easy to understand the scope of your changes:
+
+```bash
+optic diff openapi.yml --base main --check --web
+```
+
+<img src="/video/new-changelog.jpg" />
+
+### Two files use case
+
+You can also call `optic diff` on two OpenAPI files without relying on Git history. It is most often used by teams who use a different OpenAPI file for each version of their API. The first argument is `from` and the second argument is `to`:
+
+```bash
+optic diff v1.yaml v2-beta.yaml
+```
+
+### Comparing arbitrary versions of your OpenAPI files
+
+If you want to compare arbitrary versions of the files, you can use the `rev:name` format (from `git show`). This example compares the version of the spec on `d100855` to the spec on `6ec96c`:
+
+```bash
+optic diff d100855:openapi.yaml 6ec96c:openapi.yaml
+```
+
+<Callout>
+    **Diff using tags:**
+    If you want to diff by tag, use `git rev-parse [tag]` to look up the commit sha
+
+    ```
+    optic diff $(git --oneline rev-parse v2.0.0):openapi.yaml $(git --oneline rev-parse v3.0.0):openapi.yaml
+    ```
+
+</Callout>
+
+### Compatibility
+
+We take pride in how thorough Optic's OpenAPI support and diff engine are:
+
+- Validates against the [OpenAPI 3.1 or 3.0 specification](https://spec.openapis.org/oas/v3.1.0).
+- Supports `$ref` reference to a URL as long as they are be valid YAML/JSON, and resolvable from the machine running `optic`
+- Circular references will not break the tool, but schemas including circular references will be truncated
+
+
+
+## Next steps: Running Optic in CI
+Most users run Optic in their CI pipelines to flag breaking changes. Check out our CI Recipes here
+
+![alt](/img/optic-ci-results.png)

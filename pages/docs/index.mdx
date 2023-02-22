@@ -10,10 +10,10 @@ APIs built with Optic are accurately documented, never ship breaking changes, an
 <Install />
 
 
-## Create an accurate OpenAPI specs
+## Create an accurate OpenAPI spec
 
 - If you do not have an OpenAPI spec, Optic can help you **generate a spec in < 10 minutes.**
-- If you already have an OpenAPI spec, Optic can **verify the spec is accurate.** If diffs are found passing Optic the  `--patch` flag will update the spec for you.
+- If you already have an OpenAPI spec, Optic can **verify the spec is accurate.**
 
 import { Card, Cards } from '@components/card'
 import {VideoSlim} from "../../components/video";
@@ -22,14 +22,14 @@ import {VideoSlim} from "../../components/video";
   <Card
     image
     arrow
-    title="Document an Existing API"
+    title="Generate an OpenAPI spec in 10 minutes"
     href="/docs/openapi/generate-from-traffic">
     <><VideoSlim top src="/video/document-for-web.mp4" poster="/video/document.png"></VideoSlim></>
   </Card>
   <Card
     image
     arrow
-    title="Verify your OpenAPI is correct"
+    title="Verify your OpenAPI is accurate"
     href="/docs/openapi/verify-openapi">
     <><VideoSlim top src="/video/api-verify.mp4" poster="/video/verify.png"></VideoSlim></>
   </Card>
@@ -43,42 +43,35 @@ import {VideoSlim} from "../../components/video";
         image
         arrow
         title="Publishing APIs to Optic Cloud"
-        href="/docs/docs-theme/start">
-        <>![Documentation theme](/assets/docs-theme.png)</>
+        href="/docs/share-docs-with-your-team">
+        <>![Documentation theme](/img/docs.png)</>
     </Card>
     <Card
         image
         arrow
-        title="Subscribing to API Changes"
-        href="/docs/blog-theme/start">
-        <>![Blog theme](/assets/blog-theme.png)</>
+        title="Include API Changelogs in Code Review"
+        href="/docs/runnign-in-ci">
+        <div style={{marginBottom: 20}}><VideoSlim top src="/video/new-changelog-short.mp4" poster="/video/new-changelog.jpg"></VideoSlim></div>
     </Card>
 </Cards>
 
 
 
-## Ship amazing APIs
+## Ship an amazing API
 
-<Cards num={3}>
+<Cards num={2}>
     <Card
         image
         arrow
         title="Prevent Breaking Changes"
-        href="/docs/docs-theme/start">
-        <>![Documentation theme](/assets/docs-theme.png)</>
-    </Card>
-    <Card
-        image
-        arrow
-        title="API Change Review"
-        href="/docs/docs-theme/start">
-        <>![Documentation theme](/assets/docs-theme.png)</>
+        href="/docs/diff-openapi">
+        <>![Documentation theme](/img/check-for-breaking.png)</>
     </Card>
     <Card
         image
         arrow
         title="API Standards"
-        href="/docs/docs-theme/start">
-        <>![Documentation theme](/assets/docs-theme.png)</>
+        href="/docs/running-in-ci">
+        <>![Documentation theme](/img/social-image-standards.png)</>
     </Card>
 </Cards>

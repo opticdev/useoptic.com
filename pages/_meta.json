@@ -19,14 +19,15 @@
     }
   },
   "showcase": {
+    "display": "hidden",
     "type": "page",
-    "title": "Guides",
+    "title": "About",
     "theme": {
-      "typesetting": "article",
-      "layout": "full"
+      "typesetting": "article"
     }
   },
   "about": {
+    "display": "hidden",
     "type": "page",
     "title": "About",
     "theme": {

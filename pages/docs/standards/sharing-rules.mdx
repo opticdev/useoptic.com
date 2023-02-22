@@ -1,0 +1,52 @@
+---
+title: Sharing API Standards
+description: Write your own API Standards
+---
+
+Optic Rulesets are written in Typescript using Optic's SDK. If you have written Spectral rules, the first thing you will notice is that Optic does not rely on JSON Path. Instead, rules are attached to OpenAPI entities i.e. `property`, or `operation`. Specific patterns in the spec can be matched using a predicate `matches: (...) => true | false`, and rules can be triggered when parts of the spec are `added`, `removed` or `changed`. We will go into examples soon, but first let's set up a project:
+
+### Get Started
+
+Use the ruleset init command to Bootstrap a Typescript project with the correct test, build and publish scripts already configured:
+
+```bash
+optic ruleset init
+```
+
+You will need to have the `optic` CLI installed to run this command. [Install Instructions](/docs)
+
+Optic will write the following files:
+
+```
+├── README.md
+├── jest.config.js
+├── package.json
+├── src
+│   ├── __tests__
+│   │   └── main.test.ts
+│   └── main.ts
+└── tsconfig.json
+```
+
+If you use `yarn`, run `yarn install`. If you use `npm` run `npm install`
+
+### Scripts
+
+- `yarn run build` bundles all the rules and dependencies into a single `.js` file for simple distribution.
+
+- `yarn run test` runs any tests you have written to ensure your rules work as expected
+
+- `yarn run upload` deploys your ruleset to Optic Cloud. In the dashboard you will have the option to run this ruleset whenever a tracked API changes.
+
+---
+
+### 🪜 Explore examples:
+
+- [Snyk's V3 API Standards](https://github.com/snyk/sweater-comb)
+- [Breaking change standards](https://github.com/opticdev/optic/tree/main/projects/standard-rulesets/src/breaking-changes)
+- [Casing and Naming standards](https://github.com/opticdev/optic/tree/main/projects/standard-rulesets/src/naming-changes)
+- [Examples must match schema standard](https://github.com/opticdev/optic/tree/main/projects/standard-rulesets/src/examples)
+
+### 👋 Book a call
+
+Need help getting started? [Book a call with our team and we can write some rules together.](https://calendly.com/optic-onboarding/optic-office-hours)

@@ -19,8 +19,10 @@ export function Blog(props: PropsWithChildren<{title: string, image: string, aut
 }
 
 const authorName = {
-  'aidan': 'Aidan Cunniffe'
+  'aidan': 'Aidan Cunniffe',
+  'stephen': 'Stephen Mizell',
 }
 const authorImage = {
-  'aidan': "/img/team/aidan.jpg"
+  'aidan': "/img/team/aidan.jpg",
+  'stephen': "/img/team/smizell.jpg"
 }

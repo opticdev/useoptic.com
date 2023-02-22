@@ -1,0 +1,59 @@
+import {Card, Cards} from "../../components/card";
+
+import ApiAdd from '../../components/add-api.mdx'
+
+# Running Optic in CI
+
+> Connecting `optic diff` to your CI Provider and Code Host makes it easy for every developer to review API changes and follow your team's standards.
+
+**Visual API Changelogs on Pull Requests:**
+Large YAML diffs are hard to understand and review. Optic generates visual API changelogs to make code review more effective:
+
+<img src="/img/bot.png" style={{ marginBottom: 20, }} />
+
+**Test your team's API Changes:**
+Optic can fail CI to prevent breaking changes and deviation from your team's API standards:
+
+<img
+    src="/img/check-response.png"
+    style={{ marginBottom: 20 }}
+/>
+
+[//]: #
+[//]: # "3. **Verify your APIs are working as designed:**"
+[//]: # "   Use traffic from your API Tests to [verify](/docs/verify-api-behaviors) your API and OpenAPI spec are in sync."
+[//]: #
+[//]: # "<div style={{ marginBottom: 20, marginLeft: 25, }}>"
+[//]: #
+[//]: # "```bash"
+[//]: # 'optic oas capture openapi.yml http://localhost:4003 --command "go test"'
+[//]: # "optic oas verify openapi.yml"
+[//]: # "```"
+[//]: #
+[//]: # "</div>"
+
+### [Setup] Start tracking your APIs with Optic
+
+<ApiAdd />
+
+Next we will help you run `optic diff` with your CI Provider:
+
+
+<Cards num={3}>
+    <Card
+        arrow
+        title="GitHub"
+        href="/docs/github">
+    </Card>
+    <Card
+        arrow
+        title="GitLab"
+        href="/docs/gitlab">
+    </Card>
+    <Card
+        arrow
+        title="Other Providers"
+        href="/docs/manual-ci-setup">
+    </Card>
+</Cards>
+
