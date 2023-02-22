@@ -32,5 +32,12 @@
     "theme": {
       "typesetting": "article"
     }
+  },
+  "pricing": {
+    "type": "page",
+    "title": "Pricing",
+    "theme": {
+      "layout": "full"
+    }
   }
 }

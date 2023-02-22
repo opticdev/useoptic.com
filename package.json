@@ -9,6 +9,7 @@
   "author": "Shu Ding",
   "license": "MIT",
   "dependencies": {
+    "@heroicons/react": "^2.0.16",
     "@vercel/og": "^0.1.0",
     "clsx": "^1.2.1",
     "framer-motion": "^9.0.0",
