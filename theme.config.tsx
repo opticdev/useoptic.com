@@ -72,12 +72,12 @@ const config: DocsThemeConfig = {
         <meta name="og:image" content={socialCard} />
         <meta name="apple-mobile-web-app-title" content="Optic" />
         <link rel="icon" href="/favicon.png" type="image/png" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRJYSLGTFJ"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137236875-1"></script>
         <script type={"text/javascript"} dangerouslySetInnerHTML={{__html: "window.dataLayer = window.dataLayer || [];\n" +
             "          function gtag(){dataLayer.push(arguments);}\n" +
             "          gtag('js', new Date());\n" +
             "\n" +
-            "          gtag('config', 'G-ZRJYSLGTFJ');"}}>
+            "          gtag('config', 'UA-137236875-1');"}}>
         </script>
       </>
     );
