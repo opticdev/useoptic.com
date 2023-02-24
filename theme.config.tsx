@@ -43,9 +43,9 @@ const config: DocsThemeConfig = {
     const { title } = useConfig();
     const { route } = useRouter();
     const socialCard =
-      route === "/" || !title
-        ? "https://useoptic.com/img/social-image-standards.png"
-        : `https://useoptic.com/api/og?title=${title}`;
+      // route === "/" || !title
+         "https://useoptic.com/img/social-image-standards.png"
+        // : `https://useoptic.com/api/og?title=${title}`;
 
     return (
       <>
