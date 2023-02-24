@@ -40,5 +40,22 @@
     "theme": {
       "layout": "full"
     }
+  },
+
+  "cloud-terms": {
+    "display": "hidden",
+    "type": "page",
+    "title": "Terms of Service",
+    "theme": {
+      "typesetting": "article"
+    }
+  },
+  "privacy-policy": {
+    "display": "hidden",
+    "type": "page",
+    "title": "Privacy Policy",
+    "theme": {
+      "typesetting": "article"
+    }
   }
 }

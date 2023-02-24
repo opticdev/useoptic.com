@@ -114,6 +114,11 @@ const config: DocsThemeConfig = {
         <p className="mt-2 text-xs">
           © {new Date().getFullYear()} Optic Labs Corporation
         </p>
+        <p className="mt-2 text-xs">
+          <a href="cloud-terms">Terms of Service</a>
+          {" | "}
+          <a href="/privacy-policy">Privacy Policy</a>
+        </p>
       </div>
     ),
   },
