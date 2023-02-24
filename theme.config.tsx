@@ -39,6 +39,7 @@ const config: DocsThemeConfig = {
     }
   },
   logo,
+  darkMode: false,
   head: function useHead() {
     const { title } = useConfig();
     const { route } = useRouter();
@@ -53,32 +54,31 @@ const config: DocsThemeConfig = {
         <meta name="theme-color" content="#fff" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Language" content="en" />
-        <meta
-          name="description"
-          content="Ship amazing APIs"
-        />
-        <meta
-          name="og:description"
-          content="Ship amazing APIs"
-        />
+        <meta name="description" content="Ship amazing APIs" />
+        <meta name="og:description" content="Ship amazing APIs" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={socialCard} />
         <meta name="twitter:site:domain" content="@useoptic" />
         <meta name="twitter:url" content="https://useoptic.com" />
-        <meta
-          name="og:title"
-          content={title ? title + " – Optic" : "Optic"}
-        />
+        <meta name="og:title" content={title ? title + " – Optic" : "Optic"} />
         <meta name="og:image" content={socialCard} />
         <meta name="apple-mobile-web-app-title" content="Optic" />
         <link rel="icon" href="/favicon.png" type="image/png" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137236875-1"></script>
-        <script type={"text/javascript"} dangerouslySetInnerHTML={{__html: "window.dataLayer = window.dataLayer || [];\n" +
-            "          function gtag(){dataLayer.push(arguments);}\n" +
-            "          gtag('js', new Date());\n" +
-            "\n" +
-            "          gtag('config', 'UA-137236875-1');"}}>
-        </script>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-137236875-1"
+        ></script>
+        <script
+          type={"text/javascript"}
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.dataLayer = window.dataLayer || [];\n" +
+              "          function gtag(){dataLayer.push(arguments);}\n" +
+              "          gtag('js', new Date());\n" +
+              "\n" +
+              "          gtag('config', 'UA-137236875-1');",
+          }}
+        ></script>
       </>
     );
   },
@@ -110,9 +110,7 @@ const config: DocsThemeConfig = {
   footer: {
     text: (
       <div className="flex w-full flex-col items-center sm:items-start">
-        <div>
-
-        </div>
+        <div></div>
         <p className="mt-2 text-xs">
           © {new Date().getFullYear()} Optic Labs Corporation
         </p>
