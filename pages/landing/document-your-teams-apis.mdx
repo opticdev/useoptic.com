@@ -1,0 +1,375 @@
+---
+title: Document your team's APIs, know when they change
+---
+
+import {QuoteNext} from "../../components/quote";
+import Link from 'next/link'
+import {VideoSlim} from "../../components/video";
+import MiniCode from "../../components/mini-code";
+
+
+import { Features, Feature } from '@components/features'
+
+import styles from '../index.module.css'
+import Install from '../../components/install.mdx'
+
+
+<div className="home-content">
+    <div className="content-container grid xs:grid-cols-1 lg:grid-cols-7 gap-10">
+        <div className="col-span-3">
+            <h1 className="headline">Ship amazing APIs</h1>
+            <p className="subtitle" >
+                <b>Optic's open source tools help you realize the benefits of using OpenAPI, without all the effort.</b>
+                <div style={{fontSize: 18, marginTop: -40}}>
+                    <br/><span className="text-green-700">✓</span>️ Keep your team's documentation up-to-date
+                    <br/><span className="text-green-700">✓</span>️ Get notified when APIs you depend on change
+                    <br/><span className="text-green-700">✓</span>️ Prevent breaking changes
+                    <br/><span className="text-green-700">✓</span>️ Improve the design of your APIs
+                </div>
+            </p>
+            <p className="subtitle">
+                <Link className={styles.cta} href="https://app.useoptic.com">Sign up <span>→</span></Link>
+                <span className="font-bold ml-2 text-sm">Have questions? <a href="https://calendly.com/opticlabs/optic-cloud-demo-chat" target="_blank">Book a demo</a></span>
+            </p>
+        </div>
+        <div className="col-span-4 pt-10">
+            <Feature index={0} large centered id="docs-card" href="/docs/openapi/generate-from-traffic">
+                <div>
+                    <VideoSlim
+                        src="/video/document-for-web.mp4"
+                        poster="/video/document.png"
+                    />
+                </div>
+            </Feature>
+
+            <div className="italic text-center font-bold mt-2 text-gray-600">Generate accurate OpenAPI documentation using traffic</div>
+        </div>
+    </div>
+
+    <div className="content-container grid sm:grid-cols-1 lg:grid-cols-3 gap-5 pt-10 " >
+        <QuoteNext
+            cols={1}
+            name={"Gary Poster"}
+            image="/assets/snyk.svg"
+            people_image="/assets/gary.jpeg"
+            title="Senior Director Engineering"
+            quote="We are set up to provide a great API and an amazing developer experience to our consumers. Realizing the promise of OpenAPI has always been hard. Optic's tools made it easier to get developers on-board and start fulfilling the promises of working API-first."
+        />
+        <QuoteNext
+            cols={1}
+            name={"Kostas Petrakis"}
+            image="/assets/sendcloudlogo.svg"
+            title="Lead API Engineer"
+            people_image="/assets/kostas.png"
+            quote="To deliver a high quality API we need to be working API-first, and keeping track of the promises we have made to consumers. API-first has always been hard, Optic is the first tool we have found that makes it easy to quickly build and safety extend our APIs. "
+        />
+        <QuoteNext
+            cols={1}
+            name={"Marc-André Giroux"}
+            title="API Lead"
+            people_image="/assets/marc.jpeg"
+            quote="Anyone using (or wanting to use) OpenAPI to describe APIs should take a strong look at Optic. They truly get what it takes to maintain a great API at scale 🧑‍🍳🤌"
+        />
+    </div>
+
+    <style jsx>{`
+    .content-container {
+      max-width: 90rem;
+      padding-left: max(env(safe-area-inset-left),1.5rem);
+      padding-right: max(env(safe-area-inset-right),1.5rem);
+      margin: 0 auto;
+    }
+    .features-container {
+      margin: 8rem 0 0;
+      padding: 4rem 0;
+      background-color: #f3f4f6;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .features-container .content-container {
+      //margin-top: -8rem;
+    }
+    :global(.dark) .features-container {
+      background-color: #000;
+      border-bottom: 1px solid rgb(38,38,38);
+    }
+    .headline {
+      display: inline-block;
+      font-size: 3.125rem;
+      font-size: min(4.375rem, max(8vw, 2.5rem));
+      font-weight: 700;
+      font-feature-settings: initial;
+      letter-spacing: -.12rem;
+      margin-left: -0.2rem;
+      margin-top: 3.4rem;
+      line-height: 1.1;
+      background-image: linear-gradient(146deg,#000,#4c5e6e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    :global(.dark) .headline {
+      background-image: linear-gradient(146deg,#fff,#757a7d);
+    }
+    .subtitle {
+      font-size: 1.3rem;
+      font-size: min(1.3rem, max(3.5vw, 1.2rem));
+      font-feature-settings: initial;
+      line-height: 1.6;
+    }
+    .nextjs-link {
+      color: currentColor;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    :global(#docs-card) {
+      padding: 0px;
+      color: #ffffff;
+      text-shadow: 0 0 1rem rgba(0,0,0,0.1);
+    }
+    :global(#docs-card img:nth-child(2)) {
+      display: none;
+    }
+    :global(.dark #docs-card img:nth-child(2)) {
+      display: initial;
+    }
+    :global(.dark #docs-card img:nth-child(1)) {
+      display: none;
+    }
+    :global(#document-card) {
+      min-height: 300px;
+      background-image: linear-gradient(to top, transparent, #fff 100%), url(/assets/capture.png);
+      background-size: 95%;
+      background-position: calc(100% + 10px) calc(100% + 22px);
+      background-repeat: no-repeat;
+    }
+    :global(.dark #document-card) {
+      background-image: linear-gradient(to top, transparent, #202020 50%), url(/assets/capture.png);
+    }
+    :global(.feat-darkmode) {
+      min-height: 300px;
+    }
+    :global(.feat-darkmode h3) {
+      font-size: 48px;
+    }
+    :global(#search-card) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    :global(#search-card p) {
+      max-width: 320px;
+    }
+    :global(#search-card video) {
+      position: absolute;
+      right: 0;
+      top: 24px;
+      height: 430px;
+      pointer-events: none;
+      max-width: 60%;
+    }
+    :global(#fs-card) {
+      min-height: 240px;
+    }
+    :global(#fs-card h3) {
+      text-align: left;
+      width: min(300px, 41%);
+      min-width: 155px;
+    }
+    :global(#a11y-card) {
+      background-image: url(/assets/high-contrast.png);
+      background-position: -160px 160px;
+    }
+    @media screen and (max-width: 1300px) {
+      :global(#a11y-card) {
+        background-image: linear-gradient(to bottom, white, transparent), url(/assets/high-contrast.png);
+      }
+    }
+    @media screen and (max-width: 1200px) {
+      :global(#document-card) {
+        aspect-ratio: auto;
+      }
+      :global(.feat-darkmode h3) {
+        font-size: 4vw;
+        font-size: min(48px, max(4vw, 30px));
+      }
+      :global(#search-card video) {
+        aspect-ratio: 787/623;
+        height: auto;
+      }
+      .headline {
+        letter-spacing: -.08rem;
+      }
+    }
+    @media screen and (max-width: 1024px) {
+      :global(#docs-card) {
+        aspect-ratio: 135/86;
+      }
+      :global(#search-card) {
+        aspect-ratio: 8/3;
+      }
+      :global(#search-card h3) {
+        text-align: left;
+      }
+      :global(#document-card) {
+        background-size: 136%;
+      }
+      :global(#a11y-card) {
+        background-image: url(/assets/high-contrast.png);
+        background-position: center 160px;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      :global(#docs-card) {
+        min-height: 348px;
+        width: 100%;
+        aspect-ratio: auto;
+      }
+      :global(#docs-card img) {
+        object-position: -26px 0;
+        width: 250%;
+        max-width: initial;
+      }
+    }
+    @media screen and (max-width: 640px) {
+      :global(#search-card) {
+        aspect-ratio: 2.5/2;
+        justify-content: flex-start;
+        align-items: stretch;
+        min-height: 350px;
+      }
+      :global(#search-card h3) {
+        text-align: center;
+      }
+      :global(#search-card p) {
+        max-width: 100%;
+      }
+      :global(#search-card video) {
+        position: relative;
+        margin: .75em -1.75em 0;
+        max-width: calc(100% + 3.5em);
+      }
+      :global(.dark #search-card video) {
+        mix-blend-mode: lighten;
+      }
+    }
+  `}</style>
+
+    <div className="features-container">
+        <div className="content-container">
+
+            <h3 className="text-gray-400 ml-2 font-bold mb-7 text-xl tracking-wider">UNDERSTAND YOUR APIs</h3>
+
+
+            <Features>
+                <Feature index={0} large   href="/docs/openapi/generate-from-traffic">
+
+                    <h3>Accurate OpenAPI specs for each API</h3>
+                    <p className='mb-4'>Optic makes it easy for developers to update the OpenAPI spec without having to write YAML. Capture API traffic using our CLI to bootstrap an accurate OpenAPI spec for your team, then keep it up-to-date with <MiniCode>optic oas verify</MiniCode> command.</p>
+                    <VideoSlim
+                        src="/video/api-verify.mp4"
+                        poster="/video/verify.png"
+                    />
+                </Feature>
+                <Feature index={2} href="/docs/openapi/generate-from-traffic">
+                    <h3>Try Optic<br className="show-on-mobile"/></h3>
+                    <Install />
+                    <p>
+                        <Link className="!no-underline font-bold" href="/docs/openapi/generate-from-traffic">Document your API using traffic →</Link>
+                    </p>
+                    <img src="/assets/capture.png" className="mt-1" />
+
+                    <p><Link className="!no-underline font-bold" href="/docs/openapi/verify-openapi">Check the accuracy of your spec →</Link></p>
+
+
+                    <img src="/assets/verify-accurate.png" className="mt-1" />
+
+
+                </Feature>
+            </Features>
+
+            <hr className="mt-20 mb-10"/>
+
+            <h3 className="text-gray-400 ml-2 font-bold mb-7 text-xl tracking-wider">BUILD TOGETHER</h3>
+
+            <Features>
+                <Feature index={0} large href="https://app.useoptic.com" style={{display: 'flex', flexDirection: 'column'}}>
+                    <h3>Get notified when APIs you depend on change</h3>
+                    <p className='mb-4'>Optic's API Catalogue helps organizations with hundreds of API endpoints collaborate at scale. Developers get notifications when the APIs they use change, can find accurate documentation for each service, and search for APIs across the entire catalogue. <a href="https://calendly.com/opticlabs/optic-cloud-demo-chat" target="_blank">Book a demo</a> </p>
+                    <div style={{flex: 1}}></div>
+                    <img src="/assets/docs.png" className="mt-0" style={{marginBottom: -23}}  />
+                </Feature>
+
+                <Feature index={1} >
+
+                    <h3>Share API Docs<br className="show-on-mobile"/></h3>
+                    <p>
+                        Optic Cloud makes a great internal docs hub for teams of any size. You can create a free account today and invite up to 20 developers: <br/> <br/>
+                        <MiniCode block>optic login</MiniCode>
+                        <br/>
+                        <MiniCode block>optic api add your-openapi.yml</MiniCode>
+                        <br/>
+                        <Link className="!no-underline font-bold" href="https://app.useoptic.com">Invite your team →</Link>
+                    </p>
+                </Feature>
+            </Features>
+
+            <hr className="mt-20 mb-10"/>
+
+            <h3 className="text-gray-400 ml-2 font-bold mb-7 text-xl tracking-wider">PREVENT BREAKING CHANGES SHIP BETTER APIs</h3>
+
+            <Features>
+
+
+                <Feature index={6} large id="search-card" href="https://app.useoptic.com">
+                    <div style={{ zIndex: 2}}>
+                        <h3>Review Every API Change<br/> during code review</h3>
+                        <p>Reviewing OpenAPI diffs in GitHub/GitLab is really difficult. Optic Cloud adds semantic API changelogs to every Pull Request so your team can properly review and discuss every proposed API change.</p>
+                    </div>
+                    <div className="absolute w-full h-full inset-0 hidden sm:block bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]"/>
+                    <video autoPlay="autoplay" loop muted playsInline className="block">
+                        <source src="/video/changelog-small-just-for-home.mp4" type="video/mp4"/>
+                    </video>
+                </Feature>
+                <Feature index={7} className="card-with-border" >
+                    <h3>Test your API Changes<br className="show-on-mobile"/></h3>
+                    <p>
+                        <b>Check for breaking changes:</b>
+                        <MiniCode block>optic diff openapi.yml --base main --check</MiniCode>
+                        <Link className="!no-underline font-bold mt-2 block" href="/docs/diff-openapi">Read diff docs →</Link>
+                        <br/>
+
+                        <b>View a changelog:</b>
+                        <MiniCode block>optic diff openapi.yml --base main --web</MiniCode>
+                        <Link className="!no-underline font-bold mt-2 block" href="/docs/running-in-ci">Add Changelogs to Pull Requests →</Link>
+                        <br/>
+
+                    </p>
+                </Feature>
+                <Feature index={8}  className="card-with-border" href="/docs/diff-openapi">
+                    <div className="h-full flex flex-col justify-between">
+                        <h3 style={{fontSize: 28}}>Prevent breaking changes</h3>
+                        <div style={{flex: 1}}>
+                            <p className='text-left mb-8'>
+                                Because Optic understands API change over time it can test for breaking changes in your CI Pipelines.
+                            </p>
+                            <img src="/assets/optic-ci-results.png" className="mt-8" />
+                        </div>
+                    </div>
+                </Feature>
+                <Feature index={9}  href="/docs/standards">
+                    <h3>Set API Standards</h3>
+                    <p className='mb-4'>Optic is the smarter way to run your API Standards. It understands the history of your API and runs rules differently depending on the lifecycle of each endpoint. </p>
+                    <img src="/assets/ci.png" style={{maxWidth: 300}} className="mt-0" />
+                </Feature>
+
+                <Feature index={9}  href="https://app.useoptic.com">
+                    <h3>Easy Setup</h3>
+                    <p className='mb-4'>It only takes a few minutes to add Optic to GitHub and GitLab using our CI Recipes. Put the best API Review tools into your Pull/Merge Requests.</p>
+                    <img src="/assets/githublab.png" style={{maxWidth: 300}} className="mt-0" />
+                </Feature>
+
+
+            </Features>
+        </div>
+    </div>
+</div>

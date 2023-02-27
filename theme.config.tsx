@@ -39,14 +39,18 @@ const config: DocsThemeConfig = {
     }
   },
   logo,
+  nextThemes: {
+    defaultTheme: "light",
+    forcedTheme: "light",
+  },
   darkMode: false,
   head: function useHead() {
     const { title } = useConfig();
     const { route } = useRouter();
     const socialCard =
       // route === "/" || !title
-         "https://useoptic.com/img/social-image-standards.png"
-        // : `https://useoptic.com/api/og?title=${title}`;
+      "https://useoptic.com/img/social-image-standards.png";
+    // : `https://useoptic.com/api/og?title=${title}`;
 
     return (
       <>
