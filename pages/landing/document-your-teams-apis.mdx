@@ -1,6 +1,8 @@
 ---
 title: Document your team's APIs, know when they change
+description: Optic auto-documents your team's APIs with OpenAPI, and notifies you when the APIs you depend on change.
 ---
+
 
 import {QuoteNext} from "../../components/quote";
 import Link from 'next/link'
@@ -12,7 +14,11 @@ import { Features, Feature } from '@components/features'
 
 import styles from '../index.module.css'
 import Install from '../../components/install.mdx'
+import Head from 'next/head'
 
+<Head>
+<meta name="og:image" content={"/assets/subscribe.png"} />
+</Head>
 
 <div className="home-content">
     <div className="content-container grid grid-cols-1 gap-10">
