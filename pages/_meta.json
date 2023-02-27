@@ -26,14 +26,6 @@
       "typesetting": "article"
     }
   },
-  "about": {
-    "display": "hidden",
-    "type": "page",
-    "title": "About",
-    "theme": {
-      "typesetting": "article"
-    }
-  },
   "pricing": {
     "type": "page",
     "title": "Pricing",
