@@ -114,7 +114,6 @@ const config: DocsThemeConfig = {
   footer: {
     text: (
       <div className="flex w-full flex-col items-center sm:items-start">
-        <div></div>
         <p className="mt-2 text-xs">
           © {new Date().getFullYear()} Optic Labs Corporation
         </p>
