@@ -61,11 +61,11 @@ const config: DocsThemeConfig = {
         <meta name="description" content="Ship amazing APIs" />
         <meta name="og:description" content="Ship amazing APIs" />
         <meta name="twitter:card" content="summary_large_image" />
-        {/*<meta name="twitter:image" content={socialCard} />*/}
+        <meta name="twitter:image" content={socialCard} />
         <meta name="twitter:site:domain" content="@useoptic" />
         <meta name="twitter:url" content="https://useoptic.com" />
         <meta name="og:title" content={title ? title + " – Optic" : "Optic"} />
-        {/*<meta name="og:image" content={socialCard} />*/}
+        <meta name="og:image" content={socialCard} />
         <meta name="apple-mobile-web-app-title" content="Optic" />
         <link rel="icon" href="/favicon.png" type="image/png" />
         <script
