@@ -74,7 +74,9 @@ export default function Example() {
               Optic Cloud is your team's API Catalogue
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg leading-8 text-white/60">
-              Optic makes documentation for all your team's APIs available in the same place. When the APIs you depend on change, Optic notifies you.
+              Optic makes documentation for all your team's APIs available in
+              the same place. When the APIs you depend on change, Optic notifies
+              you.
             </p>
             <div className="mt-16 flex justify-center">
               <RadioGroup
@@ -186,7 +188,7 @@ export default function Example() {
                                 tier.featured ? "text-gray-900" : "text-white"
                               }
                             >
-                              per user
+                              per user / month
                             </p>
                             <p
                               className={
