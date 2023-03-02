@@ -6,5 +6,9 @@
     "theme": {
       "typesetting": "article"
     }
+  },
+  "": {
+    "display": "hidden",
+    "type": "page"
   }
 }

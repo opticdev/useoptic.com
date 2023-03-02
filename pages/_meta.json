@@ -49,5 +49,9 @@
     "theme": {
       "typesetting": "article"
     }
+  },
+  "landing": {
+    "display": "hidden",
+    "type": "page"
   }
 }

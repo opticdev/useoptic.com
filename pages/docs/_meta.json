@@ -31,5 +31,8 @@
   "oas-reference": "Capturing Traffic",
   "github": "GitHub CI Recipe",
   "gitlab": "GitLab CI Recipe",
-  "manual-ci-setup": "Other CI Providers"
+  "manual-ci-setup": "Other CI Providers",
+  "landing": {
+    "display": "hidden"
+  }
 }
