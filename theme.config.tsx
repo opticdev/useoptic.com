@@ -27,7 +27,7 @@ const logo = (
 
 const config: DocsThemeConfig = {
   project: {
-    link: "https://github.com/opticdev/useoptic.com",
+    link: "https://github.com/opticdev/optic",
   },
   docsRepositoryBase: "https://github.com/opticdev/useoptic.com/tree/main/docs",
   useNextSeoProps() {
