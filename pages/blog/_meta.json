@@ -2,5 +2,8 @@
   "index": {
     "title": "Featured",
     "display": "hidden"
+  },
+  "launching-api-docs": {
+    "title": "Launching API Documentation you can subscribe to"
   }
 }
