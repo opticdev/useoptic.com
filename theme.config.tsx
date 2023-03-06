@@ -92,27 +92,14 @@ const config: DocsThemeConfig = {
             type={"text/javascript"}
             dangerouslySetInnerHTML={{
               __html:
-                "window['_fs_host'] = 'fullstory.com';\n" +
-                "window['_fs_script'] = 'edge.fullstory.com/s/fs.js';\n" +
-                "window['_fs_org'] = 'KJ58X';\n" +
-                "window['_fs_namespace'] = 'FS';\n" +
-                "(function(m,n,e,t,l,o,g,y){\n" +
-                "    if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window[\"_fs_namespace\"].');} return;}\n" +
-                "    g=m[e]=function(a,b,s){g.q?g.q.push([a,b,s]):g._api(a,b,s);};g.q=[];\n" +
-                "    o=n.createElement(t);o.async=1;o.crossOrigin='anonymous';o.src='https://'+_fs_script;\n" +
-                "    y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);\n" +
-                "    g.identify=function(i,v,s){g(l,{uid:i},s);if(v)g(l,v,s)};g.setUserVars=function(v,s){g(l,v,s)};g.event=function(i,v,s){g('event',{n:i,p:v},s)};\n" +
-                "    g.anonymize=function(){g.identify(!!0)};\n" +
-                '    g.shutdown=function(){g("rec",!1)};g.restart=function(){g("rec",!0)};\n' +
-                '    g.log = function(a,b){g("log",[a,b])};\n' +
-                '    g.consent=function(a){g("consent",!arguments.length||a)};\n' +
-                "    g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};\n" +
-                "    g.clearUserCookie=function(){};\n" +
-                "    g.setVars=function(n, p){g('setVars',[n,p]);};\n" +
-                "    g._w={};y='XMLHttpRequest';g._w[y]=m[y];y='fetch';g._w[y]=m[y];\n" +
-                "    if(m[y])m[y]=function(){return g._w[y].apply(this,arguments)};\n" +
-                '    g._v="1.3.0";\n' +
-                "})(window,document,window['_fs_namespace'],'script','user');",
+                "(function(h,o,t,j,a,r){\n" +
+                "        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};\n" +
+                "        h._hjSettings={hjid:3395637,hjsv:6};\n" +
+                "        a=o.getElementsByTagName('head')[0];\n" +
+                "        r=o.createElement('script');r.async=1;\n" +
+                "        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;\n" +
+                "        a.appendChild(r);\n" +
+                "    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');",
             }}
           />
         )}
