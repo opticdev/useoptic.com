@@ -13,7 +13,8 @@ export function Blog(
     <>
       <Head>
         <title>{props.title}</title>
-        {/*<meta name="og:image" content={frontMatter.image} />*/}
+        {props.image && <meta name="og:image" content={props.image} />}
+        {props.image && <meta name="twitter:title" content={props.title} />}
       </Head>
       <h1
         style={{
