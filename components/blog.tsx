@@ -21,10 +21,12 @@ export function Blog(
         )}
         {props.image && (
           <meta
-            name="twitter:title"
-            content={"https://useoptic.com" + props.title}
+            name="twitter:image"
+            content={"https://useoptic.com" + props.image}
           />
         )}
+
+        {props.image && <meta name="twitter:title" content={props.title} />}
       </Head>
       <h1
         style={{
