@@ -13,6 +13,7 @@ export function Blog(
     <>
       <Head>
         <title>{props.title}</title>
+        <meta name="twitter:card" content="summary_large_image" />
         {props.image && (
           <meta
             name="og:image"
