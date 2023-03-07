@@ -1,0 +1,58 @@
+---
+title: "Launching API Documentation you can subscribe to"
+---
+
+import {Blog} from "../../components/blog";
+import Video from "../../components/video";
+
+<Blog title={"Launching API documentation you can subscribe to"} date={"2023-03-06"} author="aidan" image="/assets/subscribe.png"/>
+
+Today Optic is launching our own API Catalogue. We are focused on building a great documentation experience for companies with hundreds/thousands of internal API endpoints. Of course we are copying many of the styles and conventions from [Stripe’s famous API docs](https://stripe.com/docs/api). All that’s been done before — the exciting stuff is below the fold.
+
+**Get started 👇**
+
+```bash
+npm install -g @useoptic/optic # install
+optic login                    # login
+optic api add --all            # start tracking your OpenAPI files.
+```
+
+## Why we’re building another docs hub
+
+APIs are fast-becoming the most important dependencies between teams. There are good tools for versioning our libraries (package managers) and code (git), but versioning APIs requires new approaches. APIs are different from other kinds of software because changes affect your consumers the moment you release them. Consumers can't pin themselves to a version and integrate at their own pace.
+
+Good API documentation helps a new consumer get integrated. Most API catalogues stop there, but that is just step one. The hard work comes next: **helping consumers and producers communicate about API change and work together to achieve their goals**. That is where most teams are struggling today and it is the part of the problem we think Optic can solve better than other tools. Because Optic understands how APIs change over time, our tool focuses on helping API-powered companies collaborate effectively, move faster, and ship amazing APIs.
+
+### Subscribe to changes
+
+A view of all the endpoints is useful when you are integrating (the first 1% of your API relationship), but it is not useful once your integration enters maintenance mode (99% of the relationship). Optic lets teams subscribe to each other’s API changes so they can be notified proactively about breaking changes and new functionality.
+
+![img](/assets/docs.png)
+
+We’re also building stats into every API page, similar to how package managers have stats about each package. New consumers should be able to see how often each endpoint breaks, when it was last worked on, and who else in the company uses it.
+
+### Verified Accurate Documentation
+
+Many developers struggle to work with OpenAPI and over time the specifications stop reflecting the API’s actual behavior.
+
+Optic’s open source [`verify` command](https://www.useoptic.com/docs/openapi/verify-openapi) ensures your OpenAPI specification is accurate. If it finds any issues, it even helps you resolve them — just pass in the `--patch` flag and Optic will update the spec for you.
+
+If you’re using the Optic API Catalogue the accuracy of each endpoint in is tracked in the UI. You can see which API docs are accurate, and track improvements to your portfolio of APIs over time. We are committed to helping your team publish the most accurate and relevant API Catalogue.
+
+<img src="/assets/verified.png" style={{marginTop: 15}} width={"60%"}/>
+
+### API governance built-in
+
+We want to make it easy to work with your team’s APIs, but we also want to help teams make their APIs better over time. We’ve found the simplest and highest leverage practice any team can start doing are simple [API reviews (like a code review) whenever changes are made](https://www.useoptic.com/blog/api-review).
+
+Changes to OpenAPI specs (2-10k line YAML files) are difficult to review. One line of OpenAPI can be a breaking change to multiple endpoints — you’d never know just looking at the line without its context. Optic adds a visual, easy-to-review, changelog to every Pull Request that changes one of your APIs. Teams that use Optic in CI release 12x fewer breaking changes than they did before, and report shipping better API designs. The impact is even greater if they have an API Style Guide built with [Spectral](https://github.com/stoplightio/spectral), [ReDocly](https://redocly.com/) or [Optic](https://www.useoptic.com/docs/standards).
+
+<div className="tailwind" style={{maxWidth: 600}}>
+    <Video caption="Visual API Changelogs" src="/video/new-changelog-short.mp4" poster="/video/new-changelog.jpg" />
+</div>
+
+---
+
+### Try Optic Docs today!
+
+[Sign up for free](https://app.useoptic.com) or [Book a Demo](https://calendly.com/opticlabs/optic-cloud-demo-chat)
