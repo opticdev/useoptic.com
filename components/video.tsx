@@ -4,6 +4,7 @@ export default function Video(props: {
   src: string;
   caption: string;
   poster: string;
+  style: any;
 }) {
   const videoRef = useRef();
 
@@ -39,15 +40,17 @@ export default function Video(props: {
   return (
     <div
       className="shadow-2xl mt-5 mb-12 bg-gray-100 mb-8 "
-      style={{ border: "1px solid #e2e2e2", width: "100%" }}
+      style={{ width: "100%" }}
     >
-      <div className="flex pl-5 align-items-center py-3 ">
-        <h5 className="text-lg font-semibold">{props.caption}</h5>
-      </div>
+      {props.caption && (
+        <div className="flex pl-5 align-items-center py-3 ">
+          <h5 className="text-lg font-semibold">{props.caption}</h5>
+        </div>
+      )}
       <video
         poster={props.poster}
         ref={videoRef}
-        style={{ display: "block" }}
+        style={{ display: "block", ...props.style }}
         autoPlay
         playsInline
         muted

@@ -7,6 +7,15 @@
       "typesetting": "article"
     }
   },
+  "new-home": {
+    "display": "hidden",
+    "type": "page",
+    "title": "API Version Control",
+    "theme": {
+      "typesetting": "article",
+      "layout": "full"
+    }
+  },
   "": {
     "display": "hidden",
     "type": "page"

@@ -13,12 +13,7 @@ export function QuoteNext(props: {
 }) {
   const cols = `col-span-${props.cols}`;
   return (
-    <Feature
-      lightOnly={false}
-      centered={false}
-      href={false}
-      large={false}
-      index={0}
+    <div
       className={cols}
       style={{
         flexDirection: "column",
@@ -57,6 +52,6 @@ export function QuoteNext(props: {
           <span className="font-bold mr-1">{props.name}</span> {props.title}
         </div>
       </div>
-    </Feature>
+    </div>
   );
 }
