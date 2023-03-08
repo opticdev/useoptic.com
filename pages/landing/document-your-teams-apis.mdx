@@ -28,7 +28,7 @@ import Head from 'next/head'
                 <b>Auto-document all your APIs and get notified when the ones you depend on change</b>
             </p>
             <div>
-                <Link className={styles.cta} href="https://app.useoptic.com">Sign up <span>→</span></Link>
+                <Link className={styles.cta} href="/api/sign-up">Sign up <span>→</span></Link>
                 <span className="font-bold ml-2 text-sm">Have questions? <a href="https://calendly.com/opticlabs/optic-cloud-demo-chat" target="_blank">Book a demo</a></span>
             </div>
 
@@ -270,7 +270,7 @@ optic login
 optic api add openapi.yml
 ```
 
-**[Sign up for Optic Cloud →](https://app.useoptic.com)**
+**[Sign up for Optic Cloud →](/api/sign-up)**
 
 
 </div>
@@ -279,7 +279,7 @@ optic api add openapi.yml
     <div>
         <div className="col-span-4">
 
-            <Feature index={0} large href="https://app.useoptic.com" style={{display: 'flex', flexDirection: 'column', marginTop: 50}}>
+            <Feature index={0} large href="/api/sign-up" style={{display: 'flex', flexDirection: 'column', marginTop: 50}}>
                 <h3>Get notified when APIs you depend on change</h3>
                 <p className='mb-4'>Optic's API Catalogue helps organizations with hundreds of API endpoints collaborate at scale. Developers get notifications when the APIs they use change, can find accurate documentation for each service, and search for APIs across the entire catalogue. <a href="https://calendly.com/opticlabs/optic-cloud-demo-chat" target="_blank">Book a demo</a> </p>
                 <div style={{flex: 1}}></div>
