@@ -67,3 +67,20 @@ const authorImage = {
   aidan: "/img/team/aidan.jpg",
   stephen: "/img/team/smizell.jpg",
 };
+
+export function SocialImage(props: { image: string }) {
+  return (
+    <Head>
+      <meta name="twitter:card" content="summary_large_image" />
+      {props.image && (
+        <meta name="og:image" content={"https://useoptic.com" + props.image} />
+      )}
+      {props.image && (
+        <meta
+          name="twitter:image"
+          content={"https://useoptic.com" + props.image}
+        />
+      )}
+    </Head>
+  );
+}

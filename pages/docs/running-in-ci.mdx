@@ -1,6 +1,10 @@
 import {Card, Cards} from "../../components/card";
 
 import ApiAdd from '../../components/add-api.mdx'
+import Video from "../../components/video";
+import {SocialImage} from "../../components/blog";
+
+<SocialImage image="https://useoptic.com/img/bot.png" />
 
 # Running Optic in CI
 
@@ -10,6 +14,14 @@ import ApiAdd from '../../components/add-api.mdx'
 Large YAML diffs are hard to understand and review. Optic generates visual API changelogs to make code review more effective:
 
 <img src="/img/bot.png" style={{ marginBottom: 20, }} />
+
+<div style={{paddingLeft: 70, marginBottom: 100}}>
+<Video
+    style={{borderRadius: 3, overflow: 'hidden'}}
+    src="/video/new-changelog-short.mp4"
+    poster="/video/new-changelog.png"
+/>
+</div>
 
 **Test your team's API Changes:**
 Optic can fail CI to prevent breaking changes and deviation from your team's API standards:
