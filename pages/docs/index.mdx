@@ -1,4 +1,5 @@
 import Install from "../../components/install.mdx";
+import { Card, Cards } from '@components/card'
 
 # Get started with Optic
 
@@ -10,68 +11,65 @@ APIs built with Optic are accurately documented, never ship breaking changes, an
 <Install />
 
 
-## Create an accurate OpenAPI spec
-
-- If you do not have an OpenAPI spec, Optic can help you **generate a spec in < 10 minutes.**
-- If you already have an OpenAPI spec, Optic can **verify the spec is accurate.**
-
-import { Card, Cards } from '@components/card'
-import {VideoSlim} from "../../components/video";
-
-<Cards num={2}>
-  <Card
-    image
-    arrow
-    title="Generate an OpenAPI spec in 10 minutes"
-    href="/docs/openapi/generate-from-traffic">
-    <><VideoSlim top src="/video/document-for-web.mp4" poster="/video/document.png"></VideoSlim></>
-  </Card>
-  <Card
-    image
-    arrow
-    title="Verify your OpenAPI is accurate"
-    href="/docs/openapi/verify-openapi">
-    <><VideoSlim top src="/video/api-verify.mp4" poster="/video/verify.png"></VideoSlim></>
-  </Card>
-</Cards>
-
-
-## Share Documentation and API Changes with your Team
-
-<Cards num={2}>
+## Verify your API documentation and share with your team
+<Cards num={1}>
     <Card
-        image
+        icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        </svg>}
         arrow
-        title="Publishing APIs to Optic Cloud"
+        title="Verify your OpenAPI is accurate"
+        href="/docs/openapi/verify-openapi">
+    </Card>
+    <Card
+        arrow
+        icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+        </svg>}
+        title="Share documentation with Optic Cloud"
         href="/docs/share-docs-with-your-team">
-        <>![Documentation theme](/img/docs.png)</>
-    </Card>
-    <Card
-        image
-        arrow
-        title="Include API Changelogs in Code Review"
-        href="/docs/running-in-ci">
-        <div style={{marginBottom: 20}}><VideoSlim top src="/video/new-changelog-short.mp4" poster="/video/new-changelog.jpg"></VideoSlim></div>
     </Card>
 </Cards>
 
 
-
-## Ship an amazing API
-
-<Cards num={2}>
+**Don't have OpenAPI?**
+Optic can help generate and maintain an accurate OpenAPI spec with minimal effort.
+<Cards num={1}>
     <Card
-        image
+        icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+        </svg>}
         arrow
+        title="Generate an OpenAPI spec in 10 minutes"
+        href="/docs/openapi/generate-from-traffic">
+    </Card>
+</Cards>
+
+
+## Improve your APIs
+<Cards num={1}>
+    <Card
+        arrow
+        icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+        </svg>}
         title="Prevent Breaking Changes"
         href="/docs/diff-openapi">
-        <>![Documentation theme](/img/check-for-breaking.png)</>
     </Card>
     <Card
-        image
         arrow
-        title="API Standards"
+        icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+        </svg>}
+        title="Include API Changelogs in Code Review"
         href="/docs/running-in-ci">
-        <>![Documentation theme](/img/social-image-standards.png)</>
+    </Card>
+    <Card
+        icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" />
+        </svg>}
+        arrow
+        title="Set API Standards"
+        href="/docs/running-in-ci">
     </Card>
 </Cards>
