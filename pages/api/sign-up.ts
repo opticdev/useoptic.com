@@ -3,6 +3,7 @@ import Analytics from "analytics-node";
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
   try {
+    const analytics = new Analytics(process.env.SEGMENT_KEY || "", {
       // Handle errors thrown here
       errorHandler: (err) => {},
     });
