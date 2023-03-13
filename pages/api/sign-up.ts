@@ -9,7 +9,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     anonymousId: new Date().getTime().toString(36),
   });
 
-  await analytics.closeAndFlush();
-
   res.redirect("https://app.useoptic.com");
+
+  await analytics.closeAndFlush();
 }
