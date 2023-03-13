@@ -9,7 +9,7 @@ import Video from "../components/video";
 
 import Install from '../components/install.mdx'
 
-<div className="pl-5 pr-5" style={{height: '65vh', minHeight: '690',  justifyContent: 'center', display: 'flex', flexDirection: 'column'}}>
+<div className="pl-5 pr-5" style={{height: '65vh', maxHeight: 607, minHeight: '690',  justifyContent: 'center', display: 'flex', flexDirection: 'column'}}>
 
 <div className="max-w-4xl">
 <h1 className="text-4xl font-bold font-mono tracking-tighter">Track changes to all your team's APIs </h1>
@@ -81,8 +81,13 @@ optic api add openapi.yml --history-depth 10
 # verify the spec is accurate
 optic api verify openapi.yml
 ```
-
-
+<a
+    href="/api/sign-up"
+    type="submit"
+    className="flex-none font-bold text-blue-700  pl-2 text-md text-gray-900  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+>
+    Get Started →
+</a>
 </div>
 <div className="col-span-1">
     <img src="/img/verified-accurate.png"/>
@@ -107,6 +112,13 @@ optic oas verify openapi.yml --document
 # update existing endpoints
 optic oas verify openapi.yml --patch
 ```
+<a
+    href="/api/sign-up"
+    type="submit"
+    className="flex-none font-bold text-blue-700  pl-2 text-md text-gray-900  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+>
+    Get Started →
+</a>
 
 When you update an API Optic notifies its consumers:
 <img src="/assets/docs.png" className="mb-5"/>
@@ -136,7 +148,13 @@ optic diff openapi.yml --base main
 # check for breaking changes
 optic diff openapi.yml --base main --check
 ```
-
+    <a
+        href="/api/sign-up"
+        type="submit"
+        className="flex-none font-bold text-blue-700  pl-2 text-md text-gray-900  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    >
+        Get Started →
+    </a>
 </div>
 <div className="col-span-1 sm:p-3 md:p-14">
     <Video
@@ -157,12 +175,12 @@ optic diff openapi.yml --base main --check
     <p className="text-3xl mt-2 tracking-wider">Get the benefits of OpenAPI without all the effort</p>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5" style={{maxWidth: 500, margin: '0 auto', marginTop: 17}}>
     <a
-        href="https://calendly.com/opticlabs/optic-cloud-demo-chat"
+        href="/api/sign-up"
         type="submit"
         style={{ backgroundColor: "#1874dc" }}
         className="flex-none text-white font-bold shadow-xl rounded-md py-2.5 px-3.5 text-md text-gray-900 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
     >
-        Book Demo
+        Get Started
     </a>
               <a
         href="/docs"
