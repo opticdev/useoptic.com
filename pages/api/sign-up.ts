@@ -1,19 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import Analytics from "analytics-node";
+import Analytics from "@segment/analytics-node";
 
-export default function (req: NextApiRequest, res: NextApiResponse) {
-  try {
-    const analytics = new Analytics(process.env.SEGMENT_KEY || "", {
-      // Handle errors thrown here
-      errorHandler: (err) => {},
-    });
-    analytics.track({
-      event: "marketing.sign_up_click",
-      anonymousId: new Date().getTime().toString(36),
-    });
-  } catch (e) {
-    console.log(e);
-  }
+export default async function (req: NextApiRequest, res: NextApiResponse) {
+  const analytics = new Analytics({ writeKey: process.env.SEGMENT_KEY! });
+
+  analytics.track({
+    event: "marketing.sign_up_click",
+    anonymousId: new Date().getTime().toString(36),
+  });
 
   res.redirect("https://app.useoptic.com");
+
+  await analytics.closeAndFlush();
 }
