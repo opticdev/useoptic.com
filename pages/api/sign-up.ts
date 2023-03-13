@@ -1,13 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import Analytics from "analytics-node";
+import Analytics from "@segment/analytics-node";
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
-  const analytics = new Analytics(process.env.SEGMENT_KEY!, {
-    // Handle errors thrown here
-    errorHandler: (err) => {
-      throw new Error(err);
-    },
-  });
+  const analytics = new Analytics({ writeKey: process.env.SEGMENT_KEY! });
+
   analytics.track({
     event: "marketing.sign_up_click",
     anonymousId: new Date().getTime().toString(36),

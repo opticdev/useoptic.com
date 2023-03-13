@@ -10,8 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "@heroicons/react": "^2.0.16",
+    "@segment/analytics-node": "^1.0.0-beta.23",
     "@vercel/og": "^0.1.0",
-    "analytics-node": "^6.2.0",
     "clsx": "^1.2.1",
     "framer-motion": "^9.0.0",
     "next": "^13.1.1",
